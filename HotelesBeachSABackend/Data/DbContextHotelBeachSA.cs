@@ -10,7 +10,7 @@ namespace HotelesBeachSABackend.Data
         }
 
         public DbSet<DetallePago> DetallesPagos { get; set; }
-        public DbSet<Factura> Faturas { get; set; }
+        public DbSet<Factura> Facturas { get; set; }
         public DbSet<FormaPago> FormasPagos { get; set; }
         public DbSet<Paquete> Paquetes { get; set; }
         public DbSet<Permiso> Permisos { get; set; }

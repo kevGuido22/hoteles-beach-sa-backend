@@ -28,7 +28,7 @@ namespace HotelesBeachSABackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Faturas",
+                name: "Facturas",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -42,7 +42,7 @@ namespace HotelesBeachSABackend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Faturas", x => x.Id);
+                    table.PrimaryKey("PK_Facturas", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -173,7 +173,7 @@ namespace HotelesBeachSABackend.Migrations
                 name: "DetallesPagos");
 
             migrationBuilder.DropTable(
-                name: "Faturas");
+                name: "Facturas");
 
             migrationBuilder.DropTable(
                 name: "FormasPagos");
