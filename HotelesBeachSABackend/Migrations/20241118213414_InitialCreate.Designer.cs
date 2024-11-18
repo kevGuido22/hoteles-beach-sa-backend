@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelesBeachSABackend.Migrations
 {
     [DbContext(typeof(DbContextHotelBeachSA))]
-    [Migration("20241118060626_InitialCreate")]
+    [Migration("20241118213414_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -78,7 +78,7 @@ namespace HotelesBeachSABackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Faturas");
+                    b.ToTable("Facturas");
                 });
 
             modelBuilder.Entity("HotelesBeachSABackend.Models.FormaPago", b =>

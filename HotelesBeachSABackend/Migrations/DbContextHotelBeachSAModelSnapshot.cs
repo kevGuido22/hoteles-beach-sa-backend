@@ -75,7 +75,7 @@ namespace HotelesBeachSABackend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Faturas");
+                    b.ToTable("Facturas");
                 });
 
             modelBuilder.Entity("HotelesBeachSABackend.Models.FormaPago", b =>
