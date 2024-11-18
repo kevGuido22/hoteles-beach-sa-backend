@@ -7,7 +7,7 @@ namespace HotelesBeachSABackend.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Debe de ingresar el nombre del permiso")]
         public string Name { get; set; }
     }
 }
