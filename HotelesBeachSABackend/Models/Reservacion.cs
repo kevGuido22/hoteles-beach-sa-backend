@@ -8,12 +8,11 @@ namespace HotelesBeachSABackend.Models
     {
         [Key]
         public int Id { get; set; }
-
         [Required(ErrorMessage = "Debe de ingresar la llave foranea del usuario")]
         [ForeignKey("Usuario")]
         public int UsuarioId { get; set; }
 
-        [Required(ErrorMessage = "Debe de ingresar la llave foranea del paquete")]
+        [Required]
         [ForeignKey("Paquete")]
         public int PaqueteId { get; set; }
 
