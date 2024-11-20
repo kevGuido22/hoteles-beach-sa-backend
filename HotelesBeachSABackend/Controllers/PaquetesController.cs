@@ -25,6 +25,35 @@ namespace HotelesBeachSABackend.Controllers
             return list;
         }
 
+        [HttpGet("Buscar")]
+        public async Task<IActionResult> Buscar(int id)
+        {
+            if(id == null) //quiero que verifique si se esta enviando un string
+            {
+                return BadRequest("Debe ingresar un ID válido"); 
+            }
+            try
+            {
+                Paquete paquete = await _context.Paquetes.SingleOrDefaultAsync(x => x.Id == id); 
+                if(paquete == null)
+                {
+                    return BadRequest($"No se encontró un paquete con el ID {id}"); 
+                }
+                return Ok(paquete);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    message = $"Error inesperado al buscar el libro",
+                    detalle = ex.Message
+                });
+            }
+
+        }
+        
+
+
         [HttpPost("Crear")]
         public async Task<IActionResult> Crear(Paquete paquete)
         {
@@ -166,7 +195,7 @@ namespace HotelesBeachSABackend.Controllers
                 });
             }
 
-
+            
 
         }
     }
