@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelesBeachSABackend.Migrations
 {
     [DbContext(typeof(DbContextHotelBeachSA))]
-    [Migration("20241118060626_InitialCreate")]
+    [Migration("20241120164622_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -205,6 +205,10 @@ namespace HotelesBeachSABackend.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PermisoId");
+
+                    b.HasIndex("RolId");
+
                     b.ToTable("RolesPermisos");
                 });
 
@@ -266,7 +270,66 @@ namespace HotelesBeachSABackend.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("RolId");
+
+                    b.HasIndex("UsuarioId");
+
                     b.ToTable("UsuariosRoles");
+                });
+
+            modelBuilder.Entity("HotelesBeachSABackend.Models.RolPermiso", b =>
+                {
+                    b.HasOne("HotelesBeachSABackend.Models.Permiso", "Permiso")
+                        .WithMany("RolPermiso")
+                        .HasForeignKey("PermisoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HotelesBeachSABackend.Models.Rol", "Rol")
+                        .WithMany("RolPermiso")
+                        .HasForeignKey("RolId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Permiso");
+
+                    b.Navigation("Rol");
+                });
+
+            modelBuilder.Entity("HotelesBeachSABackend.Models.UsuarioRol", b =>
+                {
+                    b.HasOne("HotelesBeachSABackend.Models.Rol", "Rol")
+                        .WithMany("UsuarioRol")
+                        .HasForeignKey("RolId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HotelesBeachSABackend.Models.Usuario", "Usuario")
+                        .WithMany("UsuarioRol")
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Rol");
+
+                    b.Navigation("Usuario");
+                });
+
+            modelBuilder.Entity("HotelesBeachSABackend.Models.Permiso", b =>
+                {
+                    b.Navigation("RolPermiso");
+                });
+
+            modelBuilder.Entity("HotelesBeachSABackend.Models.Rol", b =>
+                {
+                    b.Navigation("RolPermiso");
+
+                    b.Navigation("UsuarioRol");
+                });
+
+            modelBuilder.Entity("HotelesBeachSABackend.Models.Usuario", b =>
+                {
+                    b.Navigation("UsuarioRol");
                 });
 #pragma warning restore 612, 618
         }

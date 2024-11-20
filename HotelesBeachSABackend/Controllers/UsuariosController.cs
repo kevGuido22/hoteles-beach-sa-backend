@@ -2,6 +2,8 @@
 using HotelesBeachSABackend.Data;
 using HotelesBeachSABackend.Models;
 using Microsoft.EntityFrameworkCore;
+using HotelesBeachSABackend.Models.Custom;
+using HotelesBeachSABackend.Services;
 
 namespace HotelesBeachSABackend.Controllers
 {
@@ -11,9 +13,12 @@ namespace HotelesBeachSABackend.Controllers
     {
         private readonly DbContextHotelBeachSA _context = null;
 
-        public UsuariosController(DbContextHotelBeachSA context)
+        private readonly IAutorizacionServices _autorizacionServices;
+
+        public UsuariosController(DbContextHotelBeachSA context, IAutorizacionServices autorizacionServices)
         {
             _context = context;
+            _autorizacionServices = autorizacionServices;
         }
 
         [HttpGet]
@@ -23,6 +28,51 @@ namespace HotelesBeachSABackend.Controllers
             usuarios = _context.Usuarios.ToList();
 
             return usuarios;
+        }
+
+        [HttpPost("ValidarUsuario")]
+        public async Task<IActionResult> ValidarUsuario(Usuario user)
+        {
+            var temp = _context.Usuarios.FirstOrDefault(x => x.Email.Equals(user.Email));
+
+            Usuario userAuth = null;
+
+            if (temp == null)
+            {
+                return NotFound();
+            }
+
+            if (!temp.Password.Equals(user.Password))
+            {
+                return NotFound();
+            }
+
+            userAuth = user;
+
+            return Ok(userAuth);
+        }
+
+        [HttpPost]
+        [Route("AutenticarPW")]
+        public async Task<IActionResult> AutenticarPW(string email, string password)
+        {
+            //se valida el email y pw deben ser correctos
+            var temp = await _context.Usuarios.FirstOrDefaultAsync(x => x.Email.Equals(email) && x.Password.Equals(password));
+
+            if (temp == null)
+            {
+                //return Unauthorized();
+                return Unauthorized(new AutorizacionResponse() { Token = "", Msj = "No autorizado", Resultado = false });
+            }
+
+            var autorizado = await _autorizacionServices.DevolverToken(temp);
+
+            if (autorizado == null)
+            {
+                return Unauthorized(new AutorizacionResponse() { Token = "", Msj = "No autorizado", Resultado = false });
+            }
+
+            return Ok(autorizado);
         }
 
         [HttpPost("Agregar")]
@@ -39,6 +89,8 @@ namespace HotelesBeachSABackend.Controllers
 
             try
             {
+                usuario.Id = 0;
+
                 _context.Add(usuario);
 
                 await _context.SaveChangesAsync();

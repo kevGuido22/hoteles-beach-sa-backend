@@ -119,20 +119,6 @@ namespace HotelesBeachSABackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RolesPermisos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    RolId = table.Column<int>(type: "int", nullable: false),
-                    PermisoId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RolesPermisos", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Usuarios",
                 columns: table => new
                 {
@@ -152,6 +138,32 @@ namespace HotelesBeachSABackend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RolesPermisos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RolId = table.Column<int>(type: "int", nullable: false),
+                    PermisoId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RolesPermisos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_RolesPermisos_Permisos_PermisoId",
+                        column: x => x.PermisoId,
+                        principalTable: "Permisos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_RolesPermisos_Roles_RolId",
+                        column: x => x.RolId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UsuariosRoles",
                 columns: table => new
                 {
@@ -163,7 +175,39 @@ namespace HotelesBeachSABackend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UsuariosRoles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UsuariosRoles_Roles_RolId",
+                        column: x => x.RolId,
+                        principalTable: "Roles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UsuariosRoles_Usuarios_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalTable: "Usuarios",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RolesPermisos_PermisoId",
+                table: "RolesPermisos",
+                column: "PermisoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RolesPermisos_RolId",
+                table: "RolesPermisos",
+                column: "RolId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsuariosRoles_RolId",
+                table: "UsuariosRoles",
+                column: "RolId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UsuariosRoles_UsuarioId",
+                table: "UsuariosRoles",
+                column: "UsuarioId");
         }
 
         /// <inheritdoc />
@@ -182,22 +226,22 @@ namespace HotelesBeachSABackend.Migrations
                 name: "Paquetes");
 
             migrationBuilder.DropTable(
-                name: "Permisos");
-
-            migrationBuilder.DropTable(
                 name: "Reservaciones");
-
-            migrationBuilder.DropTable(
-                name: "Roles");
 
             migrationBuilder.DropTable(
                 name: "RolesPermisos");
 
             migrationBuilder.DropTable(
-                name: "Usuarios");
+                name: "UsuariosRoles");
 
             migrationBuilder.DropTable(
-                name: "UsuariosRoles");
+                name: "Permisos");
+
+            migrationBuilder.DropTable(
+                name: "Roles");
+
+            migrationBuilder.DropTable(
+                name: "Usuarios");
         }
     }
 }
