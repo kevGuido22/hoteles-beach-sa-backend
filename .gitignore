@@ -20,6 +20,8 @@ obj/
 packages/
 project.lock.json
 project.fragment.lock.json
+**/packages/*
+!**/packages/build/
 
 ## Archivos de dependencias de .NET
 *.dll
@@ -70,3 +72,5 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.backup.json
+*.nuget.cache

@@ -3,6 +3,26 @@
   "WorkspaceRootPath": "C:\\laragon\\www\\hoteles-beach-sa-backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|c:\\asp.net\\proyecto\\hotelesbeachsabackend\\hotelesbeachsabackend\\services\\autorizacionservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|solutionrelative:hotelesbeachsabackend\\services\\autorizacionservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|c:\\asp.net\\proyecto\\hotelesbeachsabackend\\hotelesbeachsabackend\\models\\custom\\rolpermisoresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|solutionrelative:hotelesbeachsabackend\\models\\custom\\rolpermisoresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|c:\\asp.net\\proyecto\\hotelesbeachsabackend\\hotelesbeachsabackend\\models\\custom\\autorizacionresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|solutionrelative:hotelesbeachsabackend\\models\\custom\\autorizacionresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|c:\\asp.net\\proyecto\\hotelesbeachsabackend\\hotelesbeachsabackend\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|solutionrelative:hotelesbeachsabackend\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|c:\\asp.net\\proyecto\\hotelesbeachsabackend\\hotelesbeachsabackend\\models\\rol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|solutionrelative:hotelesbeachsabackend\\models\\rol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|c:\\asp.net\\proyecto\\hotelesbeachsabackend\\hotelesbeachsabackend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|solutionrelative:hotelesbeachsabackend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -15,22 +35,6 @@
       "RelativeMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|solutionrelative:hotelesbeachsabackend\\controllers\\usuarioscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|c:\\asp.net\\proyecto\\hotelesbeachsabackend\\hotelesbeachsabackend\\models\\custom\\autorizacionresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|solutionrelative:hotelesbeachsabackend\\models\\custom\\autorizacionresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|c:\\asp.net\\proyecto\\hotelesbeachsabackend\\hotelesbeachsabackend\\services\\autorizacionservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|solutionrelative:hotelesbeachsabackend\\services\\autorizacionservices.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|c:\\asp.net\\proyecto\\hotelesbeachsabackend\\hotelesbeachsabackend\\models\\custom\\rolpermisoresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|solutionrelative:hotelesbeachsabackend\\models\\custom\\rolpermisoresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|c:\\asp.net\\proyecto\\hotelesbeachsabackend\\hotelesbeachsabackend\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|solutionrelative:hotelesbeachsabackend\\models\\usuario.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|c:\\asp.net\\proyecto\\hotelesbeachsabackend\\hotelesbeachsabackend\\models\\rolpermiso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|solutionrelative:hotelesbeachsabackend\\models\\rolpermiso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -41,10 +45,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|c:\\asp.net\\proyecto\\hotelesbeachsabackend\\hotelesbeachsabackend\\data\\dbcontexthotelbeachsa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|solutionrelative:hotelesbeachsabackend\\data\\dbcontexthotelbeachsa.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|c:\\asp.net\\proyecto\\hotelesbeachsabackend\\hotelesbeachsabackend\\models\\rol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|solutionrelative:hotelesbeachsabackend\\models\\rol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{0F489F46-C879-490B-A004-1709350D7656}|HotelesBeachSABackend\\HotelesBeachSABackend.csproj|c:\\asp.net\\proyecto\\hotelesbeachsabackend\\hotelesbeachsabackend\\models\\permiso.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -74,7 +74,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Document",
@@ -95,77 +95,12 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UsuariosController.cs",
-              "DocumentMoniker": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Controllers\\UsuariosController.cs",
-              "RelativeDocumentMoniker": "HotelesBeachSABackend\\Controllers\\UsuariosController.cs",
-              "ToolTip": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Controllers\\UsuariosController.cs",
-              "RelativeToolTip": "HotelesBeachSABackend\\Controllers\\UsuariosController.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAgwDUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T02:19:10.543Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "RolPermisoResponse.cs",
-              "DocumentMoniker": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Models\\Custom\\RolPermisoResponse.cs",
-              "RelativeDocumentMoniker": "HotelesBeachSABackend\\Models\\Custom\\RolPermisoResponse.cs",
-              "ToolTip": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Models\\Custom\\RolPermisoResponse.cs",
-              "RelativeToolTip": "HotelesBeachSABackend\\Models\\Custom\\RolPermisoResponse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T14:13:04.694Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "DbContextHotelBeachSA.cs",
-              "DocumentMoniker": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Data\\DbContextHotelBeachSA.cs",
-              "RelativeDocumentMoniker": "HotelesBeachSABackend\\Data\\DbContextHotelBeachSA.cs",
-              "ToolTip": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Data\\DbContextHotelBeachSA.cs",
-              "RelativeToolTip": "HotelesBeachSABackend\\Data\\DbContextHotelBeachSA.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAgAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T02:13:33.395Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Rol.cs",
-              "DocumentMoniker": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Models\\Rol.cs",
-              "RelativeDocumentMoniker": "HotelesBeachSABackend\\Models\\Rol.cs",
-              "ToolTip": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Models\\Rol.cs",
-              "RelativeToolTip": "HotelesBeachSABackend\\Models\\Rol.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T13:53:17.318Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Program.cs",
-              "RelativeDocumentMoniker": "HotelesBeachSABackend\\Program.cs",
-              "ToolTip": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Program.cs",
-              "RelativeToolTip": "HotelesBeachSABackend\\Program.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAABsAAAAsAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T06:27:17.235Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\appsettings.json",
               "RelativeDocumentMoniker": "HotelesBeachSABackend\\appsettings.json",
-              "ToolTip": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\appsettings.json*",
-              "RelativeToolTip": "HotelesBeachSABackend\\appsettings.json*",
+              "ToolTip": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\appsettings.json",
+              "RelativeToolTip": "HotelesBeachSABackend\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2024-11-20T06:40:27.084Z",
@@ -173,7 +108,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "AutorizacionResponse.cs",
               "DocumentMoniker": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Models\\Custom\\AutorizacionResponse.cs",
               "RelativeDocumentMoniker": "HotelesBeachSABackend\\Models\\Custom\\AutorizacionResponse.cs",
@@ -186,20 +121,98 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "Usuario.cs",
               "DocumentMoniker": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Models\\Usuario.cs",
               "RelativeDocumentMoniker": "HotelesBeachSABackend\\Models\\Usuario.cs",
-              "ToolTip": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Models\\Usuario.cs",
-              "RelativeToolTip": "HotelesBeachSABackend\\Models\\Usuario.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAowCMAAAA/AAAAAAAAAA==",
+              "ToolTip": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Models\\Usuario.cs*",
+              "RelativeToolTip": "HotelesBeachSABackend\\Models\\Usuario.cs*",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowCQAAABDAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-18T00:51:04.784Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
+              "Title": "RolPermisoResponse.cs",
+              "DocumentMoniker": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Models\\Custom\\RolPermisoResponse.cs",
+              "RelativeDocumentMoniker": "HotelesBeachSABackend\\Models\\Custom\\RolPermisoResponse.cs",
+              "ToolTip": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Models\\Custom\\RolPermisoResponse.cs*",
+              "RelativeToolTip": "HotelesBeachSABackend\\Models\\Custom\\RolPermisoResponse.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-20T14:13:04.694Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AutorizacionServices.cs",
+              "DocumentMoniker": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Services\\AutorizacionServices.cs",
+              "RelativeDocumentMoniker": "HotelesBeachSABackend\\Services\\AutorizacionServices.cs",
+              "ToolTip": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Services\\AutorizacionServices.cs*",
+              "RelativeToolTip": "HotelesBeachSABackend\\Services\\AutorizacionServices.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD0AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-20T13:44:51.36Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Program.cs",
+              "RelativeDocumentMoniker": "HotelesBeachSABackend\\Program.cs",
+              "ToolTip": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Program.cs",
+              "RelativeToolTip": "HotelesBeachSABackend\\Program.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABsAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-20T06:27:17.235Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Rol.cs",
+              "DocumentMoniker": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Models\\Rol.cs",
+              "RelativeDocumentMoniker": "HotelesBeachSABackend\\Models\\Rol.cs",
+              "ToolTip": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Models\\Rol.cs*",
+              "RelativeToolTip": "HotelesBeachSABackend\\Models\\Rol.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABDAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-20T13:53:17.318Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "DbContextHotelBeachSA.cs",
+              "DocumentMoniker": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Data\\DbContextHotelBeachSA.cs",
+              "RelativeDocumentMoniker": "HotelesBeachSABackend\\Data\\DbContextHotelBeachSA.cs",
+              "ToolTip": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Data\\DbContextHotelBeachSA.cs",
+              "RelativeToolTip": "HotelesBeachSABackend\\Data\\DbContextHotelBeachSA.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAgAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T02:13:33.395Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UsuariosController.cs",
+              "DocumentMoniker": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Controllers\\UsuariosController.cs",
+              "RelativeDocumentMoniker": "HotelesBeachSABackend\\Controllers\\UsuariosController.cs",
+              "ToolTip": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Controllers\\UsuariosController.cs",
+              "RelativeToolTip": "HotelesBeachSABackend\\Controllers\\UsuariosController.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAgwDUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-20T02:19:10.543Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "UsuarioRol.cs",
               "DocumentMoniker": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Models\\UsuarioRol.cs",
               "RelativeDocumentMoniker": "HotelesBeachSABackend\\Models\\UsuarioRol.cs",
@@ -212,7 +225,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "RolPermiso.cs",
               "DocumentMoniker": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Models\\RolPermiso.cs",
               "RelativeDocumentMoniker": "HotelesBeachSABackend\\Models\\RolPermiso.cs",
@@ -221,19 +234,6 @@
               "ViewState": "AgIAAAoAAAAAAAAAAAAQwA8AAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-20T13:53:49.449Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AutorizacionServices.cs",
-              "DocumentMoniker": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Services\\AutorizacionServices.cs",
-              "RelativeDocumentMoniker": "HotelesBeachSABackend\\Services\\AutorizacionServices.cs",
-              "ToolTip": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\Services\\AutorizacionServices.cs",
-              "RelativeToolTip": "HotelesBeachSABackend\\Services\\AutorizacionServices.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T13:44:51.36Z",
               "EditorCaption": ""
             },
             {
