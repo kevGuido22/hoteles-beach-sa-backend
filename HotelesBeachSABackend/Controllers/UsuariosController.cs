@@ -1,0 +1,111 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using HotelesBeachSABackend.Data;
+using HotelesBeachSABackend.Models;
+using Microsoft.EntityFrameworkCore;
+
+namespace HotelesBeachSABackend.Controllers
+{
+    [ApiController]
+    [Route("[controller]")]
+    public class UsuariosController : Controller
+    {
+        private readonly DbContextHotelBeachSA _context = null;
+
+        public UsuariosController(DbContextHotelBeachSA context)
+        {
+            _context = context;
+        }
+
+        [HttpGet]
+        public List<Usuario> Listado() {
+            List<Usuario> usuarios = null;
+
+            usuarios = _context.Usuarios.ToList();
+
+            return usuarios;
+        }
+
+        [HttpPost("Agregar")]
+        public async Task<IActionResult> Agregar(Usuario usuario) {
+            if (usuario == null) {
+                return StatusCode(400, "Debe completar todos los datos del usuario");
+            }
+
+            Usuario temp = await _context.Usuarios.FirstOrDefaultAsync(x => x.Email == usuario.Email);
+
+            if (temp != null) {
+                return StatusCode(400, "Ya existe un usuario registrado con este email");
+            }
+
+            try
+            {
+                _context.Add(usuario);
+
+                await _context.SaveChangesAsync();
+
+                return StatusCode(200, "Usuario registrado exitosamente");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, ex.InnerException);
+            }
+
+            
+        }
+
+        [HttpPut("Editar")]
+        public async Task<IActionResult> Editar(Usuario usuario) {
+            
+            Usuario temp = await _context.Usuarios.FirstOrDefaultAsync(x => x.Email == usuario.Email);
+
+            if (temp == null) {
+                return StatusCode(404, "Usuario no encontrado");
+            }
+
+            try
+            {
+                temp.Telefono = usuario.Telefono;
+                temp.Direccion = usuario.Direccion;
+                temp.Nombre_Completo = usuario.Nombre_Completo;
+                temp.Tipo_Cedula = usuario.Tipo_Cedula;
+                temp.Cedula = usuario.Cedula;
+
+                _context.Update(temp);
+
+                await _context.SaveChangesAsync();
+
+                return StatusCode(200, "Usuario editado corectamente ");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500,ex.InnerException);
+            }
+        }
+
+        [HttpDelete("Eliminar")]
+        public async Task<IActionResult> Eliminar(string cedula) {
+            Usuario temp = await _context.Usuarios.FirstOrDefaultAsync(x => x.Cedula == cedula);
+
+            if (temp == null) {
+                return StatusCode(400, "Usuario no encontrado");
+            }
+
+            _context.Remove(temp);
+
+            await _context.SaveChangesAsync();
+
+            return StatusCode(200, "Usuario elimiando exitosamente");
+        }
+
+        [HttpGet("Buscar")]
+        public Usuario buscar(string email)
+        {
+            Usuario temp = null;
+
+            temp = _context.Usuarios.FirstOrDefault(x => x.Email == email);
+
+            return temp == null ? new Usuario() { Nombre_Completo = "No existe" } : temp;
+
+        }
+    }//fin clase
+}
