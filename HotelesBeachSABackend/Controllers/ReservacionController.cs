@@ -32,7 +32,7 @@ namespace HotelesBeachSABackend.Controllers
             }
             if (reservacion.UsuarioId == 0)
             {
-                return BadRequest("Debe ingresar el ID del usuario.");
+                return BadRequest("El ID del usuario debe ser mayor a 0.");
             }
             if (reservacion.PaqueteId == 0)
             {
@@ -40,7 +40,7 @@ namespace HotelesBeachSABackend.Controllers
             }
             if (reservacion.CantidadPersonas == 0)
             {
-                return BadRequest("Debe ingresar la cantidad de personas.");
+                return BadRequest("La cantidad de personas debe ser mayor a 0.");
             }
             try
             {
@@ -69,6 +69,26 @@ namespace HotelesBeachSABackend.Controllers
                     detalle = ex.Message
                 });
             }
+        }
+
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> Delete(int id) {
+            string message = "";
+            Reservacion tempReservacion = _context.Reservaciones.FirstOrDefault(x => x.Id == id);
+            if (tempReservacion == null)
+            {
+                return BadRequest("El número de reservación no existe.");
+            }
+            if (tempReservacion != null)
+            {
+                _context.Reservaciones.Remove(tempReservacion);
+                await _context.SaveChangesAsync();
+                message = $"La reservación '{tempReservacion.Id}' se eliminó de manera exitosa.";
+            }
+            return Ok(new
+            {
+                message = message
+            });
         }
     }
 }
