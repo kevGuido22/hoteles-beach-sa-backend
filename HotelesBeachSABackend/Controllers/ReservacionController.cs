@@ -26,6 +26,10 @@ namespace HotelesBeachSABackend.Controllers
         [HttpPost("Create")]
         public async Task<IActionResult> Create(Reservacion reservacion)
         {
+
+
+
+
             if (reservacion == null)
             {
                 return BadRequest("Debe ingresar la información de reservación.");
@@ -41,6 +45,16 @@ namespace HotelesBeachSABackend.Controllers
             if (reservacion.CantidadPersonas == 0)
             {
                 return BadRequest("La cantidad de personas debe ser mayor a 0.");
+            }
+            if (reservacion.PaqueteId != null)
+            {
+                bool paqueteExiste = _context.Paquetes
+                    .Any(p => p.Id == reservacion.PaqueteId && p.IsEnabled == 1);
+
+                if (!paqueteExiste)
+                {
+                    return BadRequest("El paquete no existe o no está habilitado.");
+                }
             }
             try
             {

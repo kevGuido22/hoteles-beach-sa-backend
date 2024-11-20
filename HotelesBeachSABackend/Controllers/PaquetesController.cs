@@ -17,13 +17,41 @@ namespace HotelesBeachSABackend.Controllers
             _context = context;
         }
 
-        [HttpGet("Listado")]
-        public List<Paquete> Listado()
+        
+        [HttpGet("ListadoCompleto")]
+        public List<Paquete> ListadoCompleto()
         {
             List<Paquete> list = null;
             list = _context.Paquetes.ToList();
             return list;
         }
+
+        [HttpGet("ListadoHabilitados")]
+        public async Task<IActionResult> ListadoHabilitados()
+        {
+            try
+            {
+                var list = await _context.Paquetes
+                    .Where(p => p.IsEnabled == 1)
+                    .ToListAsync(); 
+                if(list.Count == 0)
+                {
+                    return NotFound("No hay paquetes habilitados.");
+                }
+                return Ok(list); 
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    message = $"Ocurrió un error al obtener la lista de paquetes habilitados",
+                    detalle = ex.Message
+                });
+            }
+
+        }
+
+
 
         [HttpGet("Buscar")]
         public async Task<IActionResult> Buscar(int id)
@@ -52,8 +80,6 @@ namespace HotelesBeachSABackend.Controllers
 
         }
         
-
-
         [HttpPost("Crear")]
         public async Task<IActionResult> Crear(Paquete paquete)
         {
