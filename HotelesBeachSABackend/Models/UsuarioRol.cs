@@ -15,5 +15,10 @@ namespace HotelesBeachSABackend.Models
         [Required(ErrorMessage = "Debe de ingresar la llave foranea del modelo Usuario")]
         [ForeignKey("Usuario")]
         public int UsuarioId { get; set; }
+
+        //Propiedades de Navegacion
+        //Permiten acceder a las entidades relacionadas
+        public Usuario Usuario { get; set; }
+        public Rol Rol { get; set; }
     }
 }

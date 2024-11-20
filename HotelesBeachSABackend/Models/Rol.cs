@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace HotelesBeachSABackend.Models
 {
@@ -9,5 +10,11 @@ namespace HotelesBeachSABackend.Models
 
         [Required(ErrorMessage = "Debe de ingresar el nombre del rol")]
         public string Name { get; set; }
+
+        //propiedad de navegacion
+        [JsonIgnore] // Esto evita que la propiedad sea serializada
+        public ICollection<RolPermiso> RolPermiso { get; set; }
+        [JsonIgnore] // Esto evita que la propiedad sea serializada
+        public ICollection<UsuarioRol> UsuarioRol { get; set; }
     }
 }

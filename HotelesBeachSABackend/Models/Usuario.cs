@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace HotelesBeachSABackend.Models
 {
@@ -31,5 +32,9 @@ namespace HotelesBeachSABackend.Models
         [Required(ErrorMessage = "Debe de ingresar la contraseña")]
         [Column(TypeName = "VARCHAR(255)")]
         public string Password { get; set; }
+
+        //propiedad de navegacion
+        [JsonIgnore] // Esto evita que la propiedad sea serializada
+        public ICollection<UsuarioRol> UsuarioRol { get; set; }
     }
 }
