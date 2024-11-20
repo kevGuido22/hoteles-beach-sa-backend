@@ -2,7 +2,7 @@
   "version": 2,
   "dgSpecHash": "LlI/z6f6PKM=",
   "success": true,
-  "projectFilePath": "C:\\ASP.NET\\Proyecto\\HotelesBeachSABackend\\HotelesBeachSABackend\\HotelesBeachSABackend.csproj",
+  "projectFilePath": "C:\\laragon\\www\\hoteles-beach-sa-backend\\HotelesBeachSABackend\\HotelesBeachSABackend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kevin\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\kevin\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
