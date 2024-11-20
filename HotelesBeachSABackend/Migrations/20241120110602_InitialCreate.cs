@@ -67,7 +67,8 @@ namespace HotelesBeachSABackend.Migrations
                     Nombre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CostoPersona = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PrimaReserva = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Mensualidades = table.Column<int>(type: "int", nullable: false)
+                    Mensualidades = table.Column<int>(type: "int", nullable: false),
+                    IsEnabled = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelesBeachSABackend.Migrations
 {
     [DbContext(typeof(DbContextHotelBeachSA))]
-    [Migration("20241118213414_InitialCreate")]
+    [Migration("20241120110602_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -108,6 +108,9 @@ namespace HotelesBeachSABackend.Migrations
 
                     b.Property<decimal>("CostoPersona")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("IsEnabled")
+                        .HasColumnType("int");
 
                     b.Property<int>("Mensualidades")
                         .HasColumnType("int");

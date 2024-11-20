@@ -2,6 +2,7 @@
 using HotelesBeachSABackend.Data;
 using HotelesBeachSABackend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HotelesBeachSABackend.Controllers
 {
@@ -42,7 +43,7 @@ namespace HotelesBeachSABackend.Controllers
             }
             if (paquete.Mensualidades == 0)
             {
-                return BadRequest("La mensualidad debe ser mayor a 0"); 
+                return BadRequest("La mensualidad debe ser mayor a 0");
             }
             try
             {
@@ -59,8 +60,9 @@ namespace HotelesBeachSABackend.Controllers
                 {
                     message = $"Error al registrar el paquete '{paquete.Nombre}'.",
                     detalle = ex.InnerException?.Message ?? ex.Message
-                }); 
-            }catch(Exception ex)
+                });
+            }
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new
                 {
@@ -70,20 +72,102 @@ namespace HotelesBeachSABackend.Controllers
             }
         }
 
-        //[HttpDelete("Eliminar")]
-        //public async Task<IActionResult> Eliminar(int id)
-        //{
-        //    string message = "";
-        //    Paquete tempPaquete = _context.Paquetes.FirstOrDefault(x => x.Id == id);
-        //    if(tempPaquete == null)
-        //    {
-        //        return BadRequest("El ID no existe"); 
-        //    }
-        //    if(tempPaquete != null)
-        //    {
+        [HttpPut("CambiarHabilitado")]
+        public async Task<IActionResult> CambiarHabilitado(Paquete paquete)
+        {
+            if (paquete == null)
+            {
+                return BadRequest("Datos invalidos. Ingrese un ID válido.");
+            }
 
-        //    }
+            try
+            {
+                Paquete tempPaquete = await _context.Paquetes.FindAsync(paquete.Id);
 
-        //}
+                if (tempPaquete == null)
+                {
+                    return BadRequest($"No se encontró un paquete con el ID {paquete.Id}.");
+                }
+
+                tempPaquete.IsEnabled = paquete.IsEnabled;
+                _context.Paquetes.Update(tempPaquete);
+                await _context.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    message = $"El paquete {tempPaquete.Nombre} ha sido {(tempPaquete.IsEnabled == 1 ? "habilitado" : "deshabilitado")}.",
+                    paquete
+                });
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    message = $"Error al cambiar el estado del paquete",
+                    detalle = ex.InnerException?.Message ?? ex.Message
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    message = $"Error inesperado al cambiar el estado",
+                    detalle = ex.Message
+                });
+            }
+
+        }
+
+        [HttpPut("Editar")]
+        public async Task<IActionResult> Editar(Paquete tempPaquete)
+        {
+            if (tempPaquete == null)
+            {
+                return BadRequest("Datos inválidos.");
+            }
+
+            try
+            {
+                Paquete paqueteExistente = await _context.Paquetes.SingleOrDefaultAsync(x => x.Id == tempPaquete.Id);
+                if (paqueteExistente == null)
+                {
+                    return NotFound($"El paquete con el ID {tempPaquete.Id} no existe");
+                }
+
+
+                paqueteExistente.Nombre = tempPaquete.Nombre;
+                paqueteExistente.CostoPersona = tempPaquete.CostoPersona;
+                paqueteExistente.PrimaReserva = tempPaquete.PrimaReserva;
+                paqueteExistente.Mensualidades = tempPaquete.Mensualidades;
+
+                _context.Paquetes.Update(paqueteExistente);
+                await _context.SaveChangesAsync();
+                return Ok(new
+                {
+                    message = $"Paquete {paqueteExistente.Nombre} actualizado correctamente. Este método no cambia el estado de Habilitado o Desabilitado",
+                    paqueteExistente
+                });
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    message = $"Error al actualizar el paquete '{tempPaquete.Nombre}'",
+                    detalle = ex.InnerException?.Message ?? ex.Message
+                });
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    message = $"Error inesperado al actualizar el paquete",
+                    detalle = ex.Message
+                });
+            }
+
+
+
+        }
     }
 }

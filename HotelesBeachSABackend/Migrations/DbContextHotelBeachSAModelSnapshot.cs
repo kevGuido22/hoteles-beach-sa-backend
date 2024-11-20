@@ -106,6 +106,9 @@ namespace HotelesBeachSABackend.Migrations
                     b.Property<decimal>("CostoPersona")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<int>("IsEnabled")
+                        .HasColumnType("int");
+
                     b.Property<int>("Mensualidades")
                         .HasColumnType("int");
 
