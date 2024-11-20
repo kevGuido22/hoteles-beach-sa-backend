@@ -16,16 +16,16 @@ namespace HotelesBeachSABackend.Controllers
             _context = context;
         }
 
-        [HttpGet("GetAll")]
-        public List<Paquete> GetAll()
+        [HttpGet("Listado")]
+        public List<Paquete> Listado()
         {
             List<Paquete> list = null;
             list = _context.Paquetes.ToList();
             return list;
         }
 
-        [HttpPost("Create")]
-        public async Task<IActionResult> Create(Paquete paquete)
+        [HttpPost("Crear")]
+        public async Task<IActionResult> Crear(Paquete paquete)
         {
             if (paquete == null)
             {
@@ -70,5 +70,20 @@ namespace HotelesBeachSABackend.Controllers
             }
         }
 
+        //[HttpDelete("Eliminar")]
+        //public async Task<IActionResult> Eliminar(int id)
+        //{
+        //    string message = "";
+        //    Paquete tempPaquete = _context.Paquetes.FirstOrDefault(x => x.Id == id);
+        //    if(tempPaquete == null)
+        //    {
+        //        return BadRequest("El ID no existe"); 
+        //    }
+        //    if(tempPaquete != null)
+        //    {
+
+        //    }
+
+        //}
     }
 }
