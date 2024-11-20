@@ -15,21 +15,19 @@ namespace HotelesBeachSABackend.Controllers
             _context = context;
         }
 
-        [HttpGet("GetAll")]
-        public List<Reservacion> GetAll()
+        [HttpGet("Listado")]
+        public List<Reservacion> Listado()
         {
             List<Reservacion> list = null;
             list = _context.Reservaciones.ToList();
             return list;
         }
 
-        [HttpPost("Create")]
-        public async Task<IActionResult> Create(Reservacion reservacion)
+
+
+        [HttpPost("Crear")]
+        public async Task<IActionResult> Crear(Reservacion reservacion)
         {
-
-
-
-
             if (reservacion == null)
             {
                 return BadRequest("Debe ingresar la información de reservación.");
@@ -85,8 +83,9 @@ namespace HotelesBeachSABackend.Controllers
             }
         }
 
-        [HttpDelete("Delete")]
-        public async Task<IActionResult> Delete(int id) {
+        [HttpDelete("Eliminar")]
+        public async Task<IActionResult> Eliminar(int id)
+        {
             string message = "";
             Reservacion tempReservacion = _context.Reservaciones.FirstOrDefault(x => x.Id == id);
             if (tempReservacion == null)
@@ -104,7 +103,64 @@ namespace HotelesBeachSABackend.Controllers
                 message = message
             });
         }
-        
-        
+
+        [HttpPut("Editar")]
+        public async Task<IActionResult> Editar(Reservacion tempReservacion)
+        {
+            if (tempReservacion == null)
+            {
+                return BadRequest("Datos inválidos.");
+            }
+
+            if (tempReservacion.PaqueteId != null)
+            {
+                bool paqueteExiste = _context.Paquetes
+                    .Any(p => p.Id == tempReservacion.PaqueteId && p.IsEnabled == 1);
+
+                if (!paqueteExiste)
+                {
+                    return BadRequest("El paquete no existe o no está habilitado.");
+                }
+            }
+
+            try
+            {
+                Reservacion reservacionExistente = await _context.Reservaciones.SingleOrDefaultAsync(x => x.Id == tempReservacion.Id);
+                if (reservacionExistente == null)
+                {
+                    return NotFound($"El paquete con el ID {tempReservacion.Id} no existe");
+                }
+
+                reservacionExistente.FechaInicio = tempReservacion.FechaInicio;
+                reservacionExistente.FechaFin = tempReservacion.FechaFin;
+                reservacionExistente.PaqueteId = tempReservacion.PaqueteId;
+                reservacionExistente.CantidadPersonas = tempReservacion.CantidadPersonas;
+                return Ok(new
+                {
+                    message = $"La reservación {reservacionExistente.Id} se actualizó correctamente.",
+                    reservacionExistente
+                }); 
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    message = $"Error al actualizar la reservación '{tempReservacion.Id}'",
+                    detalle = ex.InnerException?.Message ?? ex.Message
+                });
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    message = $"Error inesperado al actualizar la reservación",
+                    detalle = ex.Message
+                });
+            }
+        }
+
+
+
     }
 }
