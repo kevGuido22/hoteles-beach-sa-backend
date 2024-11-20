@@ -15,5 +15,10 @@ namespace HotelesBeachSABackend.Models
         [Required(ErrorMessage = "Debe de ingresar la llave foranea del modelo Permiso")]
         [ForeignKey("Permiso")]
         public int PermisoId { get; set; }
+
+        //Propiedades de Navegacion
+        //Permiten acceder a las entidades relacionadas
+        public Permiso Permiso { get; set; }
+        public Rol Rol { get; set; }
     }
 }

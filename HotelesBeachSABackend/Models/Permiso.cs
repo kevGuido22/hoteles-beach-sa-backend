@@ -9,5 +9,8 @@ namespace HotelesBeachSABackend.Models
 
         [Required(ErrorMessage = "Debe de ingresar el nombre del permiso")]
         public string Name { get; set; }
+
+        //propiedad de navegacion
+        public ICollection<RolPermiso> RolPermiso { get; set; }
     }
 }
