@@ -40,10 +40,6 @@ namespace HotelesBeachSABackend.Controllers
                     detalle = ex.Message
                 });
             }
-
-
-
-
         }
 
         [HttpPost("ValidarUsuario")]
@@ -112,6 +108,16 @@ namespace HotelesBeachSABackend.Controllers
 
                 _context.Add(usuario);
 
+                await _context.SaveChangesAsync();
+
+                //obtener el id del usuario registrado
+                int idUsuario = usuario.Id;
+
+                //asociar al usuario con un rol (General)
+                UsuarioRol usuarioRol = new UsuarioRol { UsuarioId = idUsuario, RolId = 2};
+
+                //guadar relacion en la BD
+                _context.UsuariosRoles.Add(usuarioRol);
                 await _context.SaveChangesAsync();
 
                 return StatusCode(200, "Usuario registrado exitosamente");

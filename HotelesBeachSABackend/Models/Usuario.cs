@@ -10,12 +10,15 @@ namespace HotelesBeachSABackend.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Debe ingresar los digitos de la cedula")]
+        [MaxLength(9)]
         public string Cedula { get; set; }
 
         [Required(ErrorMessage = "Debe de indicar el tipo de cedula")]
         public string Tipo_Cedula { get; set; }
 
         [Required(ErrorMessage = "Debe de ingresar el nombre completo")]
+        [MinLength(6, ErrorMessage = "El nombre completo debe tener al menos 6 caracteres.")]
+        [MaxLength(100, ErrorMessage = "El nombre completo no puede exceder los 100 caracteres.")]
         public string Nombre_Completo { get; set; }
         
         [Required(ErrorMessage = "Debe de ingresar el numero de telefono")]
