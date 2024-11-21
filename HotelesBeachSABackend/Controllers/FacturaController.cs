@@ -124,7 +124,7 @@ namespace HotelesBeachSABackend.Controllers
                 Factura factura = await _context.Facturas.SingleOrDefaultAsync(f => f.Id == id); 
                 if(factura == null)
                 {
-                    return BadRequest($"No se encontó una factura con el ID {id}")
+                    return BadRequest($"No se encontó una factura con el ID {id}"); 
                 }
                 return Ok(factura); 
             }
