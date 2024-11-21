@@ -11,6 +11,6 @@ namespace HotelesBeachSABackend.Models
         public string Name { get; set; }
 
         //propiedad de navegacion
-        public ICollection<RolPermiso> RolPermiso { get; set; }
+        public ICollection<RolPermiso>? RolPermiso { get; set; }
     }
 }

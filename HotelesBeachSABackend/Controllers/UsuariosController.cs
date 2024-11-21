@@ -4,7 +4,6 @@ using HotelesBeachSABackend.Models;
 using Microsoft.EntityFrameworkCore;
 using HotelesBeachSABackend.Models.Custom;
 using HotelesBeachSABackend.Services;
-
 namespace HotelesBeachSABackend.Controllers
 {
     [ApiController]
@@ -21,13 +20,26 @@ namespace HotelesBeachSABackend.Controllers
             _autorizacionServices = autorizacionServices;
         }
 
-        [HttpGet]
-        public List<Usuario> Listado() {
+        [HttpGet("Listado")]
+        public async Task<IActionResult> Listado()
+        {
             List<Usuario> usuarios = null;
 
-            usuarios = _context.Usuarios.ToList();
+            try
+            {
+                usuarios = await _context.Usuarios.ToListAsync();
 
-            return usuarios;
+                return StatusCode(200, usuarios);
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    message = $"Ocurrió un error al obtener la lista de usuarios",
+                    detalle = ex.Message
+                });
+            }
         }
 
         [HttpPost("ValidarUsuario")]
@@ -76,14 +88,17 @@ namespace HotelesBeachSABackend.Controllers
         }
 
         [HttpPost("Agregar")]
-        public async Task<IActionResult> Agregar(Usuario usuario) {
-            if (usuario == null) {
+        public async Task<IActionResult> Agregar(Usuario usuario)
+        {
+            if (usuario == null)
+            {
                 return StatusCode(400, "Debe completar todos los datos del usuario");
             }
 
             Usuario temp = await _context.Usuarios.FirstOrDefaultAsync(x => x.Email == usuario.Email);
 
-            if (temp != null) {
+            if (temp != null)
+            {
                 return StatusCode(400, "Ya existe un usuario registrado con este email");
             }
 
@@ -95,6 +110,16 @@ namespace HotelesBeachSABackend.Controllers
 
                 await _context.SaveChangesAsync();
 
+                //obtener el id del usuario registrado
+                int idUsuario = usuario.Id;
+
+                //asociar al usuario con un rol (General)
+                UsuarioRol usuarioRol = new UsuarioRol { UsuarioId = idUsuario, RolId = 2};
+
+                //guadar relacion en la BD
+                _context.UsuariosRoles.Add(usuarioRol);
+                await _context.SaveChangesAsync();
+
                 return StatusCode(200, "Usuario registrado exitosamente");
             }
             catch (Exception ex)
@@ -102,15 +127,17 @@ namespace HotelesBeachSABackend.Controllers
                 return StatusCode(400, ex.InnerException);
             }
 
-            
+
         }
 
         [HttpPut("Editar")]
-        public async Task<IActionResult> Editar(Usuario usuario) {
-            
+        public async Task<IActionResult> Editar(Usuario usuario)
+        {
+
             Usuario temp = await _context.Usuarios.FirstOrDefaultAsync(x => x.Email == usuario.Email);
 
-            if (temp == null) {
+            if (temp == null)
+            {
                 return StatusCode(404, "Usuario no encontrado");
             }
 
@@ -130,23 +157,33 @@ namespace HotelesBeachSABackend.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500,ex.InnerException);
+                return StatusCode(500, ex.InnerException);
             }
         }
 
         [HttpDelete("Eliminar")]
-        public async Task<IActionResult> Eliminar(string cedula) {
+        public async Task<IActionResult> Eliminar(string cedula)
+        {
             Usuario temp = await _context.Usuarios.FirstOrDefaultAsync(x => x.Cedula == cedula);
 
-            if (temp == null) {
+            if (temp == null)
+            {
                 return StatusCode(400, "Usuario no encontrado");
             }
 
-            _context.Remove(temp);
+            try
+            {
+                _context.Remove(temp);
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
-            return StatusCode(200, "Usuario elimiando exitosamente");
+                return StatusCode(200, "Usuario elimiando exitosamente");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, ex.InnerException);
+            }
+
         }
 
         [HttpGet("Buscar")]
