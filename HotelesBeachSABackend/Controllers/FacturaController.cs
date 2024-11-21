@@ -67,26 +67,23 @@ namespace HotelesBeachSABackend.Controllers
                 {
                     return BadRequest("La forma de pago asociada no existe.");
                 }
+                if(formaPago.IsPaymentDetailRequired == false && factura.DetallePagoId != 0)
+                {
+                    return BadRequest("Esta factura no requiere detalle de pago.");
+
+                }
 
                 bool detallePagoExiste = await _context.DetallesPagos
                     .AnyAsync(d => d.Id == factura.DetallePagoId);
 
-                if (formaPago.IsPaymentDetailRequired)
+                if (formaPago.IsPaymentDetailRequired == true)
                 {
                     if (!detallePagoExiste)
                     {
                         return BadRequest("El detalle de pago asociado no existe.");
                     }
                 }
-                else
-                {
-                    if (detallePagoExiste)
-                    {
-                        return BadRequest("Esta factura no requiere detalle de pago.");
-                    }
-                }
             }
-
             try
             {
                 await _context.Facturas.AddAsync(factura);
@@ -114,5 +111,37 @@ namespace HotelesBeachSABackend.Controllers
                 });
             }
         }
+
+        [HttpGet("Buscar")]
+        public async Task<IActionResult> Buscar(int id)
+        {
+            if(id == null)
+            {
+                return BadRequest("Debe ingresar un ID válido.");
+            }
+            try
+            {
+                Factura factura = await _context.Facturas.SingleOrDefaultAsync(f => f.Id == id); 
+                if(factura == null)
+                {
+                    return BadRequest($"No se encontó una factura con el ID {id}")
+                }
+                return Ok(factura); 
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    message = $"Error inesperado al buscar la factura",
+                    detalle = ex.Message
+                });
+            }
+        }
+
+
+
+
+
+
     }
 }
