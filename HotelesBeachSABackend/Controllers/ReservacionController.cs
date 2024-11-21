@@ -23,6 +23,32 @@ namespace HotelesBeachSABackend.Controllers
             return list;
         }
 
+        [HttpGet("Buscar")]
+        public async Task<IActionResult> Buscar(int id)
+        {
+            if(id == null)
+            {
+                return BadRequest("Debe ingresar un ID válido.");
+            }
+            try
+            {
+                Reservacion reservacion = await _context.Reservaciones.SingleOrDefaultAsync(x => x.Id == id);
+                if(reservacion == null)
+                {
+                    return BadRequest($"No se encontró una reservación con el ID{id}"); 
+                }
+                return Ok(reservacion); 
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    message = $"Error inesperado al buscar la reservación",
+                    detalle = ex.Message
+                });
+            }
+        }
+
 
 
         [HttpPost("Crear")]
@@ -32,18 +58,32 @@ namespace HotelesBeachSABackend.Controllers
             {
                 return BadRequest("Debe ingresar la información de reservación.");
             }
+
             if (reservacion.UsuarioId == 0)
             {
                 return BadRequest("El ID del usuario debe ser mayor a 0.");
             }
+
             if (reservacion.PaqueteId == 0)
             {
                 return BadRequest("Debe ingresar el número de paquete.");
             }
+
             if (reservacion.CantidadPersonas == 0)
             {
                 return BadRequest("La cantidad de personas debe ser mayor a 0.");
             }
+            
+            if(reservacion.UsuarioId != null)
+            {
+                bool usuarioExiste = _context.Usuarios
+                    .Any(p => p.Id == reservacion.UsuarioId);
+                if (!usuarioExiste)
+                {
+                    return BadRequest("El usuario no existe."); 
+                }
+            }
+
             if (reservacion.PaqueteId != null)
             {
                 bool paqueteExiste = _context.Paquetes
