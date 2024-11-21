@@ -17,6 +17,10 @@ namespace HotelesBeachSABackend.Models
         [ForeignKey("FormaPago")]
         public int FormaPagoId { get; set; }
 
+        [Required(ErrorMessage = "Debe de ingresar la llave foranea del modelo DetallePago")]
+        [ForeignKey("DetallePago")]
+        public int? DetallePagoId { get; set; }
+
         [Range(1, int.MaxValue, ErrorMessage = "La cantidad de noches debe ser mayor a 0.")]
         [Required(ErrorMessage = "Debe de ingresar la cantidad de noches")]
         public int CantidadNoches { get; set; }
