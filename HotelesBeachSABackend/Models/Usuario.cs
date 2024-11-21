@@ -35,6 +35,6 @@ namespace HotelesBeachSABackend.Models
 
         //propiedad de navegacion
         [JsonIgnore] // Esto evita que la propiedad sea serializada
-        public ICollection<UsuarioRol> UsuarioRol { get; set; }
+        public ICollection<UsuarioRol>? UsuarioRol { get; set; }
     }
 }
