@@ -73,7 +73,7 @@ namespace HotelesBeachSABackend.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new
                 {
-                    message = $"Error inesperado al buscar el libro",
+                    message = $"Error inesperado al buscar el paquete",
                     detalle = ex.Message
                 });
             }
