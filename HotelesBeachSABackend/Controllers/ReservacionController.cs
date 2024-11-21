@@ -35,7 +35,7 @@ namespace HotelesBeachSABackend.Controllers
                 Reservacion reservacion = await _context.Reservaciones.SingleOrDefaultAsync(x => x.Id == id);
                 if(reservacion == null)
                 {
-                    return BadRequest($"No se encontró una reservación con el ID{id}"); 
+                    return BadRequest($"No se encontró una reservación con el ID {id}"); 
                 }
                 return Ok(reservacion); 
             }

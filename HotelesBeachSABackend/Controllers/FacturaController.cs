@@ -38,5 +38,54 @@ namespace HotelesBeachSABackend.Controllers
             }
         }
 
+        [HttpGet("Crear")]
+        public async Task<IActionResult> Crear([FromBody]Factura factura)
+        {
+            if(factura == null)
+            {
+                return BadRequest("Datos inválidos."); 
+            }
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState); 
+            }
+            if (factura.FormaPagoId != null &&
+                !await _context.FormasPagos.AnyAsync(f => f.Id == factura.FormaPagoId))
+            {
+                return BadRequest("La forma de pago asociada no existe.");
+            }
+
+            if (factura.ReservacionId != null &&
+                !await _context.Reservaciones.AnyAsync(r => r.Id == factura.ReservacionId))
+            {
+                return BadRequest("La reservación asociada no existe.");
+            }
+            try
+            {
+                await _context.Facturas.AddAsync(factura);
+                await _context.SaveChangesAsync(); 
+                return Ok(new
+                {
+                    message =  $"la factura '{factura.Id}' se registró de manera exitosa"
+                });
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    message = $"Error al registrar la factura '{factura.Id}'",
+                    detalle = ex.InnerException?.Message ?? ex.Message
+                });
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    message = $"Error inesperado al registrar la factura",
+                    detalle = ex.Message
+                });
+            }
+        }
     }
 }
