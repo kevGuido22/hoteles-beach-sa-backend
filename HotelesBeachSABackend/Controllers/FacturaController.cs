@@ -38,7 +38,7 @@ namespace HotelesBeachSABackend.Controllers
             }
         }
 
-        [HttpGet("Crear")]
+        [HttpPost("Crear")]
         public async Task<IActionResult> Crear([FromBody]Factura factura)
         {
             if(factura == null)
@@ -54,6 +54,7 @@ namespace HotelesBeachSABackend.Controllers
             {
                 return BadRequest("La forma de pago asociada no existe.");
             }
+
 
             if (factura.ReservacionId != null &&
                 !await _context.Reservaciones.AnyAsync(r => r.Id == factura.ReservacionId))
