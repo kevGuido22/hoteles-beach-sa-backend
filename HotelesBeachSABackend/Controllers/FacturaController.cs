@@ -67,7 +67,7 @@ namespace HotelesBeachSABackend.Controllers
                 {
                     return BadRequest("La forma de pago asociada no existe.");
                 }
-                if(formaPago.IsPaymentDetailRequired == false && factura.DetallePagoId != 0)
+                if (formaPago.IsPaymentDetailRequired == false && factura.DetallePagoId != 0)
                 {
                     return BadRequest("Esta factura no requiere detalle de pago.");
 
@@ -115,18 +115,18 @@ namespace HotelesBeachSABackend.Controllers
         [HttpGet("Buscar")]
         public async Task<IActionResult> Buscar(int id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return BadRequest("Debe ingresar un ID válido.");
             }
             try
             {
-                Factura factura = await _context.Facturas.SingleOrDefaultAsync(f => f.Id == id); 
-                if(factura == null)
+                Factura factura = await _context.Facturas.SingleOrDefaultAsync(f => f.Id == id);
+                if (factura == null)
                 {
-                    return BadRequest($"No se encontó una factura con el ID {id}"); 
+                    return BadRequest($"No se encontó una factura con el ID {id}");
                 }
-                return Ok(factura); 
+                return Ok(factura);
             }
             catch (Exception ex)
             {
@@ -143,7 +143,7 @@ namespace HotelesBeachSABackend.Controllers
         {
             if (tempFactura == null)
             {
-                return BadRequest("Datos Inválidos"); 
+                return BadRequest("Datos Inválidos");
             }
 
             if (!ModelState.IsValid)
@@ -186,8 +186,8 @@ namespace HotelesBeachSABackend.Controllers
             }
             try
             {
-                Factura facturaExistente = await _context.Facturas.SingleOrDefaultAsync(x => x.Id == tempFactura.Id); 
-                if(facturaExistente == null)
+                Factura facturaExistente = await _context.Facturas.SingleOrDefaultAsync(x => x.Id == tempFactura.Id);
+                if (facturaExistente == null)
                 {
                     return NotFound($"La factura con el ID {tempFactura.Id} no existe");
                 }
@@ -200,6 +200,11 @@ namespace HotelesBeachSABackend.Controllers
                 facturaExistente.TotalColones = tempFactura.TotalColones;
                 _context.Facturas.Update(facturaExistente);
                 await _context.SaveChangesAsync();
+                return Ok(new
+                {
+                    message = $"La factura {facturaExistente.Id} se actualizó correctamente", 
+                    facturaExistente
+                });
             }
             catch (DbUpdateException ex)
             {
@@ -218,13 +223,6 @@ namespace HotelesBeachSABackend.Controllers
                     detalle = ex.Message
                 });
             }
-
         }
-
-
-
-
-
-
     }
 }
