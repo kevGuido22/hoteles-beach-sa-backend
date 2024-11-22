@@ -138,6 +138,71 @@ namespace HotelesBeachSABackend.Controllers
             }
         }
 
+        [HttpPut("Editar")]
+        public async Task<IActionResult> Editar(Factura tempFactura)
+        {
+            if (tempFactura == null)
+            {
+                return BadRequest("Datos Inválidos"); 
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            if (tempFactura.ReservacionId != null &&
+                !await _context.Reservaciones.AnyAsync(r => r.Id == tempFactura.ReservacionId))
+            {
+                return BadRequest("La reservación asociada no existe.");
+            }
+
+            if (tempFactura.FormaPagoId != null)
+            {
+                var formaPago = await _context.FormasPagos
+                    .Where(f => f.Id == tempFactura.FormaPagoId)
+                    .Select(f => new { f.Id, f.IsPaymentDetailRequired })
+                    .FirstOrDefaultAsync();
+
+                if (formaPago == null)
+                {
+                    return BadRequest("La forma de pago asociada no existe.");
+                }
+                if (formaPago.IsPaymentDetailRequired == false && tempFactura.DetallePagoId != 0)
+                {
+                    return BadRequest("Esta factura no requiere detalle de pago.");
+
+                }
+
+                bool detallePagoExiste = await _context.DetallesPagos
+                    .AnyAsync(d => d.Id == tempFactura.DetallePagoId);
+
+                if (formaPago.IsPaymentDetailRequired == true)
+                {
+                    if (!detallePagoExiste)
+                    {
+                        return BadRequest("El detalle de pago asociado no existe.");
+                    }
+                }
+            }
+            try
+            {
+                Factura facturaExistente = await _context.Facturas.SingleOrDefaultAsync(x => x.Id == tempFactura.Id); 
+                if(facturaExistente == null)
+                {
+                    return NotFound($"La factura con el ID {tempFactura.Id} no existe");
+                }
+                facturaExistente.ReservacionId = tempFactura.ReservacionId;
+                facturaExistente.FormaPagoId = tempFactura.FormaPagoId;
+                facturaExistente.DetallePagoId = tempFactura.DetallePagoId; 
+                facturaExistente.ValorDescuento = tempFactura.ValorDescuento;
+                facturaExistente.TotalDolares = tempFactura.TotalDolares;
+                facturaExistente.TotalColones = tempFactura.TotalColones;
+                facturaExistente.CantidadNoches = tempFactura.CantidadNoches; 
+                facturaExistente.de
+            }
+
+        }
+
 
 
 
