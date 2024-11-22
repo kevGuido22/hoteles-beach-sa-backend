@@ -7,7 +7,7 @@ using HotelesBeachSABackend.Services;
 namespace HotelesBeachSABackend.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class UsuariosController : Controller
     {
         private readonly DbContextHotelBeachSA _context = null;

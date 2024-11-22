@@ -193,12 +193,30 @@ namespace HotelesBeachSABackend.Controllers
                 }
                 facturaExistente.ReservacionId = tempFactura.ReservacionId;
                 facturaExistente.FormaPagoId = tempFactura.FormaPagoId;
-                facturaExistente.DetallePagoId = tempFactura.DetallePagoId; 
+                facturaExistente.DetallePagoId = tempFactura.DetallePagoId;
+                facturaExistente.CantidadNoches = tempFactura.CantidadNoches;
                 facturaExistente.ValorDescuento = tempFactura.ValorDescuento;
                 facturaExistente.TotalDolares = tempFactura.TotalDolares;
                 facturaExistente.TotalColones = tempFactura.TotalColones;
-                facturaExistente.CantidadNoches = tempFactura.CantidadNoches; 
-                facturaExistente.de
+                _context.Facturas.Update(facturaExistente);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    message = $"Error al actualizar la factura con el ID: '{tempFactura.Id}'",
+                    detalle = ex.InnerException?.Message ?? ex.Message
+                });
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    message = $"Error inesperado al actualizar la factura",
+                    detalle = ex.Message
+                });
             }
 
         }

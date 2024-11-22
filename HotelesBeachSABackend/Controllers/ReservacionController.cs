@@ -175,6 +175,8 @@ namespace HotelesBeachSABackend.Controllers
                 reservacionExistente.FechaFin = tempReservacion.FechaFin;
                 reservacionExistente.PaqueteId = tempReservacion.PaqueteId;
                 reservacionExistente.CantidadPersonas = tempReservacion.CantidadPersonas;
+                _context.Reservaciones.Update(reservacionExistente);
+                await _context.SaveChangesAsync();
                 return Ok(new
                 {
                     message = $"La reservación {reservacionExistente.Id} se actualizó correctamente.",
