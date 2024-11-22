@@ -35,7 +35,7 @@ namespace HotelesBeachSABackend.Controllers
                 Reservacion reservacion = await _context.Reservaciones.SingleOrDefaultAsync(x => x.Id == id);
                 if(reservacion == null)
                 {
-                    return BadRequest($"No se encontró una reservación con el ID{id}"); 
+                    return BadRequest($"No se encontró una reservación con el ID {id}"); 
                 }
                 return Ok(reservacion); 
             }
@@ -175,6 +175,8 @@ namespace HotelesBeachSABackend.Controllers
                 reservacionExistente.FechaFin = tempReservacion.FechaFin;
                 reservacionExistente.PaqueteId = tempReservacion.PaqueteId;
                 reservacionExistente.CantidadPersonas = tempReservacion.CantidadPersonas;
+                _context.Reservaciones.Update(reservacionExistente);
+                await _context.SaveChangesAsync();
                 return Ok(new
                 {
                     message = $"La reservación {reservacionExistente.Id} se actualizó correctamente.",
