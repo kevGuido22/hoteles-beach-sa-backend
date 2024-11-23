@@ -56,6 +56,8 @@ builder.Services.AddSwaggerGen();
 
 //inicio servicios de correo
 builder.Services.AddTransient<IEmailService, EmailService>();
+builder.Services.AddScoped<InvoiceService>();
+
 //fin servicios de correo
 
 var app = builder.Build();
