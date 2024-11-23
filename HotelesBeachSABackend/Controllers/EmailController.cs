@@ -36,7 +36,7 @@ namespace HotelesBeachSABackend.Controllers
             using var stream = new MemoryStream();
             pdfDocument.Save(stream, false);
             var pdfBytes = stream.ToArray();
-            await emailService.SendEmailWithAttachment(email, theme, body, pdfBytes, "Invoice.pdf");
+            await emailService.SendEmailWithAttachment(email, theme, body, pdfBytes, "Factura-Hotel-Beach.pdf");
             return Ok(new {message = "Email enviado correctamente"});
         }
 
