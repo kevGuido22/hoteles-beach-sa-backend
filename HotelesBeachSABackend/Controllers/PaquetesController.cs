@@ -8,6 +8,7 @@ namespace HotelesBeachSABackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class PaquetesController : ControllerBase
     {
         private readonly DbContextHotelBeachSA _context = null;
@@ -81,6 +82,7 @@ namespace HotelesBeachSABackend.Controllers
         }
         
         [HttpPost("Crear")]
+        [Authorize]
         public async Task<IActionResult> Crear(Paquete paquete)
         {
             if (paquete == null)
@@ -128,6 +130,7 @@ namespace HotelesBeachSABackend.Controllers
         }
 
         [HttpPut("CambiarHabilitado")]
+        [Authorize]
         public async Task<IActionResult> CambiarHabilitado(Paquete paquete)
         {
             if (paquete == null)
@@ -174,6 +177,7 @@ namespace HotelesBeachSABackend.Controllers
         }
 
         [HttpPut("Editar")]
+        [Authorize]
         public async Task<IActionResult> Editar(Paquete tempPaquete)
         {
             if (tempPaquete == null)
@@ -220,9 +224,6 @@ namespace HotelesBeachSABackend.Controllers
                     detalle = ex.Message
                 });
             }
-
-            
-
         }
     }
 }
