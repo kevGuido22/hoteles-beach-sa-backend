@@ -2,10 +2,12 @@
 using HotelesBeachSABackend.Data;
 using HotelesBeachSABackend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 namespace HotelesBeachSABackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class FacturaController : ControllerBase
     {
         private readonly DbContextHotelBeachSA _context = null;
@@ -40,6 +42,7 @@ namespace HotelesBeachSABackend.Controllers
         }
 
         [HttpPost("Crear")]
+        [Authorize]
         public async Task<IActionResult> Crear([FromBody] Factura factura)
         {
             if (factura == null)
@@ -139,6 +142,7 @@ namespace HotelesBeachSABackend.Controllers
         }
 
         [HttpPut("Editar")]
+        [Authorize]
         public async Task<IActionResult> Editar(Factura tempFactura)
         {
             if (tempFactura == null)

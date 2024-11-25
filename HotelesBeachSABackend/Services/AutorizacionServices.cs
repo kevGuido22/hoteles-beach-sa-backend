@@ -60,6 +60,7 @@ namespace HotelesBeachSABackend.Services
                 Token = tokenCreado,
                 Resultado = true,
                 Msj = "Ok",
+                Usuario = usuario,
                 Roles = roles.Select(r => new RolPermisoResponse
                 {
                     Rol = r.RolNombre,
