@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using HotelesBeachSABackend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 namespace HotelesBeachSABackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class ReservacionController : ControllerBase
     {
         private readonly DbContextHotelBeachSA _context = null;
@@ -52,6 +54,7 @@ namespace HotelesBeachSABackend.Controllers
 
 
         [HttpPost("Crear")]
+        [Authorize]
         public async Task<IActionResult> Crear(Reservacion reservacion)
         {
             if (reservacion == null)
@@ -124,6 +127,7 @@ namespace HotelesBeachSABackend.Controllers
         }
 
         [HttpDelete("Eliminar")]
+        [Authorize]
         public async Task<IActionResult> Eliminar(int id)
         {
             string message = "";
@@ -145,6 +149,7 @@ namespace HotelesBeachSABackend.Controllers
         }
 
         [HttpPut("Editar")]
+        [Authorize]
         public async Task<IActionResult> Editar(Reservacion tempReservacion)
         {
             if (tempReservacion == null)
@@ -201,8 +206,5 @@ namespace HotelesBeachSABackend.Controllers
                 });
             }
         }
-
-
-
     }
 }

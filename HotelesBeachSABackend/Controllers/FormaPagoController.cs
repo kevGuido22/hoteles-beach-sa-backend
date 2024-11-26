@@ -2,11 +2,13 @@
 using HotelesBeachSABackend.Data;
 using HotelesBeachSABackend.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HotelesBeachSABackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class FormaPagoController : ControllerBase
     {
         private readonly DbContextHotelBeachSA _context = null;
