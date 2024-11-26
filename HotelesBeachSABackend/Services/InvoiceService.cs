@@ -1,6 +1,5 @@
 ﻿using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Shapes;
-using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering;
 using PdfSharp.Pdf;
 using System.Security.Cryptography;
@@ -10,9 +9,9 @@ namespace HotelesBeachSABackend.Services
     {
         private string logoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "LogoHotelBeach.png");
 
-        public PdfDocument GetInvoice()
-        {
+        public PdfDocument GetInvoice() {
             //create a new migraDoc document
+
             var document = new Document();
 
             BuildDocument(document);
@@ -42,56 +41,44 @@ namespace HotelesBeachSABackend.Services
                 style.ParagraphFormat.SpaceAfter = "8pt";
             }
 
+            Image image = section.Headers.Primary.AddImage(logoPath);
+            image.Height = "4cm";
+            image.LockAspectRatio = true;
+            image.RelativeVertical = RelativeVertical.Margin;
+            image.RelativeHorizontal = RelativeHorizontal.Margin;
+            image.Top = ShapePosition.Top;
+            image.Left = ShapePosition.Right;
+            image.WrapFormat.Style = WrapStyle.Through;
+
             // Agrega un párrafo con formato
             var paragraph = section.AddParagraph();
             paragraph.Format.Font.Name = "Arial";
             paragraph.Format.Font.Size = 12;
-            paragraph.Format.SpaceAfter = "6pt";
+            paragraph.Format.SpaceAfter = "20pt";
+
+            // Estilo de encabezado
+            var paragraphHeader = section.AddParagraph();
+            paragraphHeader.Format.Font.Name = "Arial";
+            paragraphHeader.Format.Font.Size = 12;
+            paragraphHeader.Format.SpaceAfter = "4pt";
+            paragraphHeader.Format.SpaceBefore = "20pt";
+
+            // Encabezado del documento
+            paragraphHeader.AddFormattedText("Hotel Beach S.A.", TextFormat.Bold);
+            paragraphHeader.AddLineBreak();
+
+            // Información del sitio web
+            paragraphHeader.AddText("Sitio Web: ");
+            paragraphHeader.AddHyperlink("www.hotelbeach.com");
+            paragraphHeader.AddLineBreak();
+
+            // Información del correo electrónico
+            paragraphHeader.AddText("Correo Electrónico: ");
+            paragraphHeader.AddText("hotelbeachnotificaciones@gmail.com");
+            paragraphHeader.AddLineBreak();
 
 
-            // Agrega una tabla con dos columnas
-            Table tableHeader = section.AddTable();
-            tableHeader.Borders.Visible = false;
-
-            // Define las columnas
-            tableHeader.AddColumn(Unit.FromCentimeter(12)); // Ajusta el ancho según sea necesario
-            tableHeader.AddColumn(Unit.FromCentimeter(3));  // Columna para la imagen
-
-            // Agrega una fila a la tabla
-            Row rowHeader = tableHeader.AddRow();
-
-            // Celda para el texto
-            Cell textCell = rowHeader.Cells[0];
-            Paragraph textParagraph = textCell.AddParagraph();
-            textParagraph.Format.Font.Name = "Arial";
-            textParagraph.Format.Font.Size = 12;
-            textParagraph.Format.SpaceAfter = "6pt";
-
-            // Agrega el texto al párrafo
-            textParagraph.AddFormattedText("Hotel Beach S.A.", TextFormat.Bold);
-            textParagraph.AddLineBreak();
-            textParagraph.AddText("Sitio Web: ");
-            textParagraph.AddHyperlink("www.hotelbeach.com");
-            textParagraph.AddLineBreak();
-            textParagraph.AddText("Correo Electrónico: ");
-            textParagraph.AddText("hotelbeachnotificaciones@gmail.com");
-            textParagraph.AddLineBreak();
-
-            // Celda para la imagen
-            Cell imageCell = rowHeader.Cells[1];
-            Paragraph imageParagraph = imageCell.AddParagraph();
-            imageParagraph.Format.Alignment = ParagraphAlignment.Center; // Centrar horizontalmente
-
-            // Agregar la imagen
-            Image image = imageParagraph.AddImage(logoPath);
-
-            // Ajusta las propiedades de la imagen
-            image.Width = Unit.FromCentimeter(3); // Tamaño de la imagen
-            image.LockAspectRatio = true;
-
-
-
-            //logo
+            
 
             // Información del usuario
             var userParagraph = section.AddParagraph();
@@ -172,9 +159,10 @@ namespace HotelesBeachSABackend.Services
             var costTable = section.AddTable();
             costTable.Borders.Width = 0.75;
             costTable.Format.SpaceAfter = "12pt";  // Controla el espacio después de la tabla
-
+            costTable.Format.Alignment = ParagraphAlignment.Right;
+            costTable.Rows.LeftIndent = Unit.FromCentimeter(7.60);
             // Definir las columnas de la tabla de costos
-            costTable.AddColumn(Unit.FromCentimeter(8)); // Columna 1: Descripción
+            costTable.AddColumn(Unit.FromCentimeter(4)); // Columna 1: Descripción
             costTable.AddColumn(Unit.FromCentimeter(4)); // Columna 2: Monto
 
             // Agregar la primera fila con los encabezados
