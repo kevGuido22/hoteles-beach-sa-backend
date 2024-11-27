@@ -8,7 +8,7 @@ namespace HotelesBeachSABackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
+
     public class FormaPagoController : ControllerBase
     {
         private readonly DbContextHotelBeachSA _context = null;
@@ -41,6 +41,8 @@ namespace HotelesBeachSABackend.Controllers
                 });
             }
         }
+
+        
 
     }
 }

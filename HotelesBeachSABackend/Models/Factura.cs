@@ -25,14 +25,14 @@ namespace HotelesBeachSABackend.Models
         [Required(ErrorMessage = "Debe de ingresar la cantidad de noches")]
         public int CantidadNoches { get; set; }
 
-        [Range(0.01, double.MaxValue, ErrorMessage = "El valor de descuesto debe ser mayor a 0.")]
+        //[Range(0.01, double.MaxValue, ErrorMessage = "El valor de descuesto debe ser mayor a 0.")]
         [Required(ErrorMessage = "Debe de ingresar el valor del descuento")]
         public decimal ValorDescuento { get; set; }
-        [Range(0.01, double.MaxValue, ErrorMessage = "El total en dólares debe ser mayor a 0.")]
+        //[Range(0.01, double.MaxValue, ErrorMessage = "El total en dólares debe ser mayor a 0.")]
 
         [Required(ErrorMessage = "Debe de ingresar el valor total en dolares")]
         public decimal TotalDolares { get; set; }
-        [Range(0.01, double.MaxValue, ErrorMessage = "El total en colones debe ser mayor a 0.")]
+        //[Range(0.01, double.MaxValue, ErrorMessage = "El total en colones debe ser mayor a 0.")]
 
         [Required(ErrorMessage = "Debe de ingresar el valor total en colones")]
         public decimal TotalColones{ get; set; }
