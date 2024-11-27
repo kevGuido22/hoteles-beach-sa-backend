@@ -54,7 +54,7 @@ namespace HotelesBeachSABackend.Controllers
 
 
         [HttpPost("Crear")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Crear(Reservacion reservacion)
         {
             if (reservacion == null)

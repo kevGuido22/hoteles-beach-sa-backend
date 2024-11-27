@@ -1,5 +1,6 @@
 ﻿using HotelesBeachSABackend.Data;
 using HotelesBeachSABackend.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,7 @@ namespace HotelesBeachSABackend.Controllers
 
 
         [HttpPost("Crear")]
+        [Authorize]
         public async Task<IActionResult> Crear(DetallePago detallePago)
         {
             if (detallePago == null)
