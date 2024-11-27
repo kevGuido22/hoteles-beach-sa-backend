@@ -54,7 +54,7 @@ namespace HotelesBeachSABackend.Controllers
 
 
         [HttpPost("Crear")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Crear(Reservacion reservacion)
         {
             if (reservacion == null)
@@ -101,11 +101,12 @@ namespace HotelesBeachSABackend.Controllers
             {
                 await _context.Reservaciones.AddAsync(reservacion);
                 await _context.SaveChangesAsync();
-                return Ok(new
-                {
-                    message = $"La reservación '{reservacion.Id}' se registró de manera exitosa."
+                //return Ok(new
+                //{
+                //    message = $"La reservación '{reservacion.Id}' se registró de manera exitosa."
 
-                });
+                //});
+                return StatusCode(201, reservacion);
             }
             catch (DbUpdateException ex)
             {

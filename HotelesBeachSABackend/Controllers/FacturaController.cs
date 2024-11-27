@@ -42,7 +42,7 @@ namespace HotelesBeachSABackend.Controllers
         }
 
         [HttpPost("Crear")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Crear([FromBody] Factura factura)
         {
             if (factura == null)
