@@ -10,19 +10,18 @@ namespace HotelesBeachSABackend.Services
         private string logoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "LogoHotelBeach.png");
 
         public PdfDocument GetInvoice() {
-            //create a new migraDoc document
-
+            //Se crea un nuevo documento de tipo MigraDoc
             var document = new Document();
 
             BuildDocument(document);
 
-            //create a renderer for the MigraDoc Document
+            //se crea un renderer para el documento de MigraDoc
             var pdfRenderer = new PdfDocumentRenderer
             {
                 Document = document
             };
 
-            //layout and render document to pdf
+            //Se renderiza el documento
             pdfRenderer.RenderDocument();
             return pdfRenderer.PdfDocument;
         }
@@ -31,7 +30,7 @@ namespace HotelesBeachSABackend.Services
         {
             Section section = document.AddSection();
 
-            // Estilos personalizados con MigraDoc
+            // Estilos personalizados
             var style = document.Styles["Heading1"];
             if (style == null)
             {
@@ -40,7 +39,7 @@ namespace HotelesBeachSABackend.Services
                 style.Font.Bold = true;
                 style.ParagraphFormat.SpaceAfter = "8pt";
             }
-
+            //Estilos para el logotipo
             Image image = section.Headers.Primary.AddImage(logoPath);
             image.Height = "4cm";
             image.LockAspectRatio = true;
@@ -50,7 +49,7 @@ namespace HotelesBeachSABackend.Services
             image.Left = ShapePosition.Right;
             image.WrapFormat.Style = WrapStyle.Through;
 
-            // Agrega un párrafo con formato
+            // Estilo de parrafo
             var paragraph = section.AddParagraph();
             paragraph.Format.Font.Name = "Arial";
             paragraph.Format.Font.Size = 12;
@@ -76,9 +75,6 @@ namespace HotelesBeachSABackend.Services
             paragraphHeader.AddText("Correo Electrónico: ");
             paragraphHeader.AddText("hotelbeachnotificaciones@gmail.com");
             paragraphHeader.AddLineBreak();
-
-
-            
 
             // Información del usuario
             var userParagraph = section.AddParagraph();
@@ -122,10 +118,10 @@ namespace HotelesBeachSABackend.Services
             reservationParagraph.AddText("Forma de Pago: Efectivo");
             reservationParagraph.AddLineBreak();
 
-            // Agregar la tabla con los detalles del paquete
+            // Creacion de Tabla para 
             var table = section.AddTable();
             table.Borders.Width = 0.75;
-            table.Format.SpaceAfter = "12pt";  // Controla el espacio después de la tabla
+            table.Format.SpaceAfter = "12pt";  
 
             // Definir las columnas de la tabla
             table.AddColumn(Unit.FromCentimeter(5)); // Columna 1: Paquete
@@ -133,39 +129,37 @@ namespace HotelesBeachSABackend.Services
             table.AddColumn(Unit.FromCentimeter(4)); // Columna 3: Cantidad de Personas
             table.AddColumn(Unit.FromCentimeter(4)); // Columna 4: Costo por Persona
 
-            // Establecer encabezados con formato en negrita
+            // Nombres de las columnas
             var row = table.AddRow();
             row.Cells[0].AddParagraph("Paquete").Format.Font.Bold = true;
             row.Cells[1].AddParagraph("Mensualidades").Format.Font.Bold = true;
             row.Cells[2].AddParagraph("Cantidad de Personas").Format.Font.Bold = true;
             row.Cells[3].AddParagraph("Costo por Persona").Format.Font.Bold = true;
 
-            // Agregar la fila con los datos
+            // Valores de la columna
             row = table.AddRow();
             row.Cells[0].AddParagraph("Todo Incluido");
             row.Cells[1].AddParagraph("12");
             row.Cells[2].AddParagraph("5");
             row.Cells[3].AddParagraph("$25");
 
-            // Agregar un salto de línea para evitar que las tablas se peguen
-            section.AddParagraph().Format.SpaceAfter = "12pt";  // Esto ayuda a agregar un espacio entre las tablas
+            section.AddParagraph().Format.SpaceAfter = "12pt"; 
 
-            // Agregar otra sección para los costos
+            // Costos
             reservationParagraph.AddLineBreak();
             reservationParagraph.AddFormattedText("Resumen de Costos", TextFormat.Bold);
             reservationParagraph.AddLineBreak();
 
-            // Agregar otra tabla con los costos
+            // Tabla Costos
             var costTable = section.AddTable();
             costTable.Borders.Width = 0.75;
-            costTable.Format.SpaceAfter = "12pt";  // Controla el espacio después de la tabla
+            costTable.Format.SpaceAfter = "12pt";  
             costTable.Format.Alignment = ParagraphAlignment.Right;
             costTable.Rows.LeftIndent = Unit.FromCentimeter(7.60);
-            // Definir las columnas de la tabla de costos
             costTable.AddColumn(Unit.FromCentimeter(4)); // Columna 1: Descripción
             costTable.AddColumn(Unit.FromCentimeter(4)); // Columna 2: Monto
 
-            // Agregar la primera fila con los encabezados
+            // Valores
             row = costTable.AddRow();
             row.Cells[0].AddParagraph("Subtotal (Dólares)").Format.Font.Bold = true;
             row.Cells[1].AddParagraph("$1000").Format.Font.Bold = true;
