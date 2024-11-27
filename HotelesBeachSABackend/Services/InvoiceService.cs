@@ -1,4 +1,5 @@
-﻿using MigraDoc.DocumentObjectModel;
+﻿using HotelesBeachSABackend.Models;
+using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.Rendering;
 using PdfSharp.Pdf;
@@ -9,11 +10,11 @@ namespace HotelesBeachSABackend.Services
     {
         private string logoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "LogoHotelBeach.png");
 
-        public PdfDocument GetInvoice() {
+        public PdfDocument GetInvoice(int idFactura) {
             //Se crea un nuevo documento de tipo MigraDoc
             var document = new Document();
 
-            BuildDocument(document);
+            BuildDocument(document, idFactura);
 
             //se crea un renderer para el documento de MigraDoc
             var pdfRenderer = new PdfDocumentRenderer
@@ -26,7 +27,7 @@ namespace HotelesBeachSABackend.Services
             return pdfRenderer.PdfDocument;
         }
 
-        private void BuildDocument(Document document)
+        private void BuildDocument(Document document, int idFactura)
         {
             Section section = document.AddSection();
 
@@ -87,7 +88,7 @@ namespace HotelesBeachSABackend.Services
             userParagraph.AddLineBreak();
 
             // Nombre del usuario
-            userParagraph.AddText("Nombre: Juan Pérez");
+            userParagraph.AddText($"Nombre: {idFactura}");
             userParagraph.AddLineBreak();
 
             // Cédula del usuario
@@ -155,7 +156,7 @@ namespace HotelesBeachSABackend.Services
             costTable.Borders.Width = 0.75;
             costTable.Format.SpaceAfter = "12pt";  
             costTable.Format.Alignment = ParagraphAlignment.Right;
-            costTable.Rows.LeftIndent = Unit.FromCentimeter(7.60);
+            costTable.Rows.LeftIndent = Unit.FromCentimeter(7.90);
             costTable.AddColumn(Unit.FromCentimeter(4)); // Columna 1: Descripción
             costTable.AddColumn(Unit.FromCentimeter(4)); // Columna 2: Monto
 
