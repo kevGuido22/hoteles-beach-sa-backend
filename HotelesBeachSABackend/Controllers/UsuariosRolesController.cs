@@ -1,4 +1,5 @@
 ﻿using HotelesBeachSABackend.Data;
+using HotelesBeachSABackend.Models;
 using HotelesBeachSABackend.Models.Custom;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,32 @@ namespace HotelesBeachSABackend.Controllers
                 .ToListAsync();
 
             return StatusCode(200, usuariosRoles);
+        }
+
+        [HttpGet("Buscar")]
+        public async Task<IActionResult> Buscar(int usuarioRolId) 
+        {
+            var usuarioRol = await _context.UsuariosRoles
+               .Include(rp => rp.Usuario)
+               .Include(rp => rp.Rol)
+               .Where(rp => rp.Id == usuarioRolId)
+               .Select(rp => new UsuarioRolDTO
+               {
+                   UsuarioRolID = rp.Id,
+                   UsuarioId = rp.Usuario.Id,
+                   Email = rp.Usuario.Email,
+                   NombreCompleto = rp.Usuario.Nombre_Completo,
+                   RolId = rp.Rol.Id,
+                   RolName = rp.Rol.Name
+               })
+            .FirstOrDefaultAsync();
+
+            if (usuarioRol == null)
+            {
+                return StatusCode(404, "El UsuarioRol no fue encontrado");
+            }
+
+            return StatusCode(200, usuarioRol);
         }
     }
 }

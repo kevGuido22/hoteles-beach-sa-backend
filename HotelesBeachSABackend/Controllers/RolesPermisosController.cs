@@ -60,7 +60,7 @@ namespace HotelesBeachSABackend.Controllers
 
             if (rolPermiso == null)
             {
-                return NotFound(new { message = "El RolPermiso no fue encontrado." });
+                return StatusCode(404, "El RolPermiso no fue encontrado");
             }
 
             return StatusCode(200, rolPermiso);
