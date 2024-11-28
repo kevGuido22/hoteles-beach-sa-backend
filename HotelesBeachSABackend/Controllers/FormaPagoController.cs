@@ -41,6 +41,11 @@ namespace HotelesBeachSABackend.Controllers
                 });
             }
         }
+        [HttpGet("ObtenerPaqueteAsync")]
+        public async Task<FormaPago> ObtenerFormaPagoAsync(int id)
+        {
+            return await _context.FormasPagos.FirstOrDefaultAsync(f => f.Id == id);
+        }
 
         
 

@@ -187,13 +187,21 @@ namespace HotelesBeachSABackend.Controllers
         }
 
         [HttpGet("Buscar")]
-        public Usuario buscar(string email)
+        public Usuario Buscar(string email)
         {
             Usuario temp = null;
 
             temp = _context.Usuarios.FirstOrDefault(x => x.Email == email);
 
             return temp == null ? new Usuario() { Nombre_Completo = "No existe" } : temp;
+
+        }
+
+        [HttpGet("ObtenerUsuarioAsync")]
+        public async Task<Usuario> ObtenerUsuarioAsync(string email)
+        {
+            return await _context.Usuarios.FirstOrDefaultAsync(x => x.Email == email);
+
 
         }
     }//fin clase
