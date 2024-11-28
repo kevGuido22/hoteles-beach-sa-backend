@@ -11,11 +11,11 @@ namespace HotelesBeachSABackend.Services
     {
         private string logoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "LogoHotelBeach.png");
 
-        public PdfDocument GetInvoice(Factura factura, Usuario usuario, Reservacion reservacion, Paquete paquete, string formaPago) {
+        public PdfDocument GetInvoice(Factura factura, Usuario usuario, Reservacion reservacion, Paquete paquete, string formaPago, DetallePago tempDetallePago) {
             //Se crea un nuevo documento de tipo MigraDoc
             var document = new Document();
 
-            BuildDocument(document, factura, usuario, reservacion, paquete, formaPago);
+            BuildDocument(document, factura, usuario, reservacion, paquete, formaPago, tempDetallePago);
 
             //se crea un renderer para el documento de MigraDoc
             var pdfRenderer = new PdfDocumentRenderer
@@ -28,7 +28,7 @@ namespace HotelesBeachSABackend.Services
             return pdfRenderer.PdfDocument;
         }
 
-        private void BuildDocument(Document document, Factura tempFactura, Usuario tempUsuario, Reservacion tempReservacion, Paquete tempPaquete, string tempFormaPago)
+        private void BuildDocument(Document document, Factura tempFactura, Usuario tempUsuario, Reservacion tempReservacion, Paquete tempPaquete, string tempFormaPago, DetallePago tempDetallePago)
         {
             Section section = document.AddSection();
 
@@ -119,6 +119,23 @@ namespace HotelesBeachSABackend.Services
             reservationParagraph.AddLineBreak();
             reservationParagraph.AddText($"Forma de Pago: {tempFormaPago}");
             reservationParagraph.AddLineBreak();
+
+            if(tempFormaPago != "Efectivo")
+            {
+                if (tempFormaPago == "Cheque")
+                {
+                    reservationParagraph.AddText($"Número de Cheque: {tempDetallePago.NumeroCheque}");
+                    reservationParagraph.AddLineBreak();
+                }
+                if(tempFormaPago == "Tarjeta")
+                {
+                    reservationParagraph.AddText($"Número de Cheque: {tempDetallePago.NumeroTarjeta}");
+                    reservationParagraph.AddLineBreak();
+                }
+                reservationParagraph.AddText($"Banco: {tempDetallePago.Banco}");
+                reservationParagraph.AddLineBreak();
+            }
+
 
             reservationParagraph.AddText($"Cantidad de Noches: {tempFactura.CantidadNoches}");
             reservationParagraph.AddLineBreak();

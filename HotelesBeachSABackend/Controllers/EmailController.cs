@@ -38,6 +38,7 @@ namespace HotelesBeachSABackend.Controllers
         {
             Reservacion tempReservacion = null;
             Paquete tempPaquete = null;
+            DetallePago tempDetallePago = null;
             Factura tempFactura =  await _context.Facturas.FirstOrDefaultAsync(f => f.Id == payload.FacturaId);
             Usuario tempUsuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == payload.Email);
             FormaPago tempFormaPago = await _context.FormasPagos.FirstOrDefaultAsync(x => x.Id == payload.FormaPagoId);
@@ -49,6 +50,8 @@ namespace HotelesBeachSABackend.Controllers
                 {
                     tempPaquete = await _context.Paquetes.FirstOrDefaultAsync(p => p.Id == tempReservacion.PaqueteId);
                 }
+                tempDetallePago = await _context.DetallesPagos.FirstOrDefaultAsync(d => d.Id == tempFactura.DetallePagoId); 
+
             }
 
             string theme = "Su factura de Hotel Beach está disponible";
@@ -66,7 +69,7 @@ namespace HotelesBeachSABackend.Controllers
             hotelbeachnotificaciones@gmail.com | 1234-1234
             ";
 
-            var pdfDocument = invoiceService.GetInvoice(tempFactura, tempUsuario, tempReservacion, tempPaquete, tempFormaPago.Name);
+            var pdfDocument = invoiceService.GetInvoice(tempFactura, tempUsuario, tempReservacion, tempPaquete, tempFormaPago.Name, tempDetallePago);
             using var stream = new MemoryStream();
             pdfDocument.Save(stream, false);
             var pdfBytes = stream.ToArray();
