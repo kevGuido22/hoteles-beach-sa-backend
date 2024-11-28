@@ -91,10 +91,11 @@ namespace HotelesBeachSABackend.Controllers
                 await _context.Facturas.AddAsync(factura);
                 await _context.SaveChangesAsync();
 
-                return Ok(new
-                {
-                    message = $"la factura '{factura.Id}' se registró de manera exitosa"
-                });
+                //return Ok(new
+                //{
+                //    message = $"la factura '{factura.Id}' se registró de manera exitosa"
+                //});
+                return StatusCode(201, factura);
             }
             catch (DbUpdateException ex)
             {
