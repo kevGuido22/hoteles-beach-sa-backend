@@ -107,5 +107,18 @@ namespace HotelesBeachSABackend.Controllers
             }
         }
 
+        [HttpGet("Buscar")]
+        public async Task<IActionResult> Buscar(int id)
+        {
+            Rol rolTemp = await _context.Roles.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (rolTemp == null) 
+            {
+                return StatusCode(400, "No se encontro ningun rol con este id");
+            }
+
+            return StatusCode(200, rolTemp);
+        }
+
     }
 }
