@@ -1,6 +1,7 @@
 ﻿using HotelesBeachSABackend.Data;
 using HotelesBeachSABackend.Models;
 using HotelesBeachSABackend.Models.Custom;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,6 +18,7 @@ namespace HotelesBeachSABackend.Controllers
         }
 
         [HttpGet("Listado")]
+        [Authorize]
         public async Task<IActionResult> Listado() 
         {
             var usuariosRoles = await _context.UsuariosRoles
@@ -37,6 +39,7 @@ namespace HotelesBeachSABackend.Controllers
         }
 
         [HttpGet("Buscar")]
+        [Authorize]
         public async Task<IActionResult> Buscar(int usuarioRolId) 
         {
             var usuarioRol = await _context.UsuariosRoles
@@ -61,5 +64,48 @@ namespace HotelesBeachSABackend.Controllers
 
             return StatusCode(200, usuarioRol);
         }
+
+        [HttpPost("Crear")]
+        public async Task<IActionResult> Crear(UsuarioRolDTO usuarioRol) 
+        {
+            Usuario usuarioTemp = await _context.Usuarios.FirstOrDefaultAsync(x => x.Id == usuarioRol.UsuarioId);
+
+            if (usuarioTemp == null)
+            {
+                return StatusCode(400, $"No existe un usuario con este id {usuarioRol.UsuarioRolID}");
+            }
+
+            Rol rolTemp = await _context.Roles.FirstOrDefaultAsync(x => x.Id == usuarioRol.RolId);
+
+            if (rolTemp == null)
+            {
+                return StatusCode(400, $"No existe un rol con este Id {usuarioRol.RolId}");
+            }
+
+            try
+            {
+                UsuarioRol usuarioRolTemp = new UsuarioRol
+                {
+                    Id = 0,
+                    UsuarioId = usuarioTemp.Id,
+                    RolId = rolTemp.Id,
+                };
+
+                _context.UsuariosRoles.Add(usuarioRolTemp);
+
+                await _context.SaveChangesAsync();
+
+                return StatusCode(201, usuarioRolTemp);
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, $"Error al agregar un UsuarioRol: {ex.InnerException}");
+            }
+
+
+        }
+        
+
     }
 }
