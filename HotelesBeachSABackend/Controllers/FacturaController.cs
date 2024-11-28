@@ -7,7 +7,6 @@ namespace HotelesBeachSABackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
     public class FacturaController : ControllerBase
     {
         private readonly DbContextHotelBeachSA _context = null;

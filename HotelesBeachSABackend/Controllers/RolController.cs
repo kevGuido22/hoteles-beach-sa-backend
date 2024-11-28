@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using HotelesBeachSABackend.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace HotelesBeachSABackend.Controllers
 {
@@ -46,6 +47,38 @@ namespace HotelesBeachSABackend.Controllers
             {
                 return StatusCode(500, "Error al crear un Rol");
             }
+        }
+
+        [HttpPut("Editar")]
+        public async Task<IActionResult> Editar(Rol rol) 
+        {
+            if (rol == null)
+            {
+                return StatusCode(400, "Debe de llenar los del rol");
+            }
+
+            Rol rolTemp = await _context.Roles.FirstOrDefaultAsync(x => x.Id == rol.Id);
+
+            if (rolTemp == null) {
+                return StatusCode(404, "No existe un rol asociado ");
+            }
+
+            try
+            {
+                rolTemp.Name = rol.Name;
+
+                _context.Roles.Update(rolTemp);
+
+                await _context.SaveChangesAsync();
+
+                return StatusCode(200, "Rol editado correctamente");
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Error al editar un rol");
+            }
+
         }
     }
 }
