@@ -50,8 +50,11 @@ namespace HotelesBeachSABackend.Controllers
                 });
             }
         }
-
-
+        [HttpGet("ObtenerReservacionAsync")]
+        public async Task<Reservacion> ObtenerReservacionAsync(int id)
+        {
+            return await _context.Reservaciones.FirstOrDefaultAsync(f => f.Id == id);
+        }
 
         [HttpPost("Crear")]
         [Authorize]
