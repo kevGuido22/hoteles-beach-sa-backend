@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using HotelesBeachSABackend.Controllers;
 using Microsoft.EntityFrameworkCore;
 using HotelesBeachSABackend.Data;
+using HotelesBeachSABackend.Models.Custom;
 namespace HotelesBeachSABackend.Controllers
 {
     [Route("api/[controller]")]
@@ -33,12 +34,13 @@ namespace HotelesBeachSABackend.Controllers
         //}
 
         [HttpPost("SendWithInvoice")]
-        public async Task<IActionResult> SendWithInvoice(string email, int idFactura, string formaPago)
+        public async Task<IActionResult> SendWithInvoice(PayloadEmailFactura payload)
         {
             Reservacion tempReservacion = null;
             Paquete tempPaquete = null;
-            Factura tempFactura =  await _context.Facturas.FirstOrDefaultAsync(f => f.Id == idFactura);
-            Usuario tempUsuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == email);
+            Factura tempFactura =  await _context.Facturas.FirstOrDefaultAsync(f => f.Id == payload.FacturaId);
+            Usuario tempUsuario = await _context.Usuarios.FirstOrDefaultAsync(u => u.Email == payload.Email);
+            FormaPago tempFormaPago = await _context.FormasPagos.FirstOrDefaultAsync(x => x.Id == payload.FormaPagoId);
             
             if (tempFactura != null && tempFactura.ReservacionId != null)
             {
@@ -64,11 +66,11 @@ namespace HotelesBeachSABackend.Controllers
             hotelbeachnotificaciones@gmail.com | 1234-1234
             ";
 
-            var pdfDocument = invoiceService.GetInvoice(tempFactura, tempUsuario, tempReservacion, tempPaquete, formaPago);
+            var pdfDocument = invoiceService.GetInvoice(tempFactura, tempUsuario, tempReservacion, tempPaquete, tempFormaPago.Name);
             using var stream = new MemoryStream();
             pdfDocument.Save(stream, false);
             var pdfBytes = stream.ToArray();
-            await emailService.SendEmailWithAttachment(email, theme, body, pdfBytes, "Factura-Hotel-Beach.pdf");
+            await emailService.SendEmailWithAttachment(payload.Email, theme, body, pdfBytes, "Factura-Hotel-Beach.pdf");
             return Ok(new { message = "Email enviado correctamente" });
         }
 

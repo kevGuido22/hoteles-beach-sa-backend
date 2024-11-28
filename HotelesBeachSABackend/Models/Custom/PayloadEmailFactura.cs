@@ -6,6 +6,6 @@
 
         public int FacturaId { get; set; }
 
-        public string FormaPago { get; set; }
+        public int FormaPagoId { get; set; }
     }
 }
