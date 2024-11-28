@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace HotelesBeachSABackend.Models
 {
@@ -11,6 +12,7 @@ namespace HotelesBeachSABackend.Models
         public string Name { get; set; }
 
         //propiedad de navegacion
+        [JsonIgnore]
         public ICollection<RolPermiso>? RolPermiso { get; set; }
     }
 }
