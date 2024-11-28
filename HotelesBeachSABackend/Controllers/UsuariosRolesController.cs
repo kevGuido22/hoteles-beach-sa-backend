@@ -18,7 +18,7 @@ namespace HotelesBeachSABackend.Controllers
         }
 
         [HttpGet("Listado")]
-        [Authorize]
+        
         public async Task<IActionResult> Listado() 
         {
             var usuariosRoles = await _context.UsuariosRoles
@@ -39,7 +39,6 @@ namespace HotelesBeachSABackend.Controllers
         }
 
         [HttpGet("Buscar")]
-        [Authorize]
         public async Task<IActionResult> Buscar(int usuarioRolId) 
         {
             var usuarioRol = await _context.UsuariosRoles
@@ -66,6 +65,7 @@ namespace HotelesBeachSABackend.Controllers
         }
 
         [HttpPost("Crear")]
+        [Authorize]
         public async Task<IActionResult> Crear(UsuarioRolDTO usuarioRol) 
         {
             Usuario usuarioTemp = await _context.Usuarios.FirstOrDefaultAsync(x => x.Id == usuarioRol.UsuarioId);
@@ -102,10 +102,32 @@ namespace HotelesBeachSABackend.Controllers
 
                 return StatusCode(500, $"Error al agregar un UsuarioRol: {ex.InnerException}");
             }
-
-
         }
-        
 
+        [HttpDelete("Eliminar")]
+        [Authorize]
+        public async Task<IActionResult> Eliminar(int usuarioRolId) 
+        {
+            UsuarioRol usuarioRol = await _context.UsuariosRoles.FirstOrDefaultAsync(x => x.Id == usuarioRolId);
+
+            if (usuarioRol == null)
+            {
+                return StatusCode(404, "No se encuentra este registro de UsuarioRol");
+            }
+
+            try
+            {
+                _context.UsuariosRoles.Remove(usuarioRol);
+
+                await _context.SaveChangesAsync();
+
+                return StatusCode(200, "UsuarioRol eliminado");
+            }
+            catch (Exception ex)
+            {
+
+                return StatusCode(500, $"Error al eliminar un UsuarioRol: {ex.InnerException}");
+            }
+        }
     }
 }
