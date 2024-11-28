@@ -84,5 +84,30 @@ namespace HotelesBeachSABackend.Controllers
 
         }
 
+        [HttpDelete("Eliminar")]
+        [Authorize]
+        public async Task<IActionResult> Eliminar(int id)
+        {
+            Permiso permisoTemp = await _context.Permisos.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (permisoTemp == null)
+            {
+                return StatusCode(400, "No existe un permiso con este id");
+            }
+
+            try
+            {
+                _context.Permisos.Remove(permisoTemp);
+
+                await _context.SaveChangesAsync();
+
+                return StatusCode(200, "Permiso eliminado exitosamente");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al eliminar un permiso: {ex.InnerException}");
+            }
+        }
+
     }
 }
