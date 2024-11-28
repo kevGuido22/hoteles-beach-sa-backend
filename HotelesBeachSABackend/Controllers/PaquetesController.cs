@@ -52,7 +52,11 @@ namespace HotelesBeachSABackend.Controllers
 
         }
 
-
+        [HttpGet("ObtenerPaqueteAsync")]
+        public async Task<Paquete> ObtenerPaqueteAsync(int id)
+        {
+            return await _context.Paquetes.FirstOrDefaultAsync(f => f.Id == id);
+        }
 
         [HttpGet("Buscar")]
         public async Task<IActionResult> Buscar(int id)

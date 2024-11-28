@@ -1,4 +1,5 @@
-﻿using HotelesBeachSABackend.Models;
+﻿using HotelesBeachSABackend.Controllers;
+using HotelesBeachSABackend.Models;
 using MigraDoc.DocumentObjectModel;
 using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.Rendering;
@@ -10,11 +11,11 @@ namespace HotelesBeachSABackend.Services
     {
         private string logoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "LogoHotelBeach.png");
 
-        public PdfDocument GetInvoice(int idFactura) {
+        public PdfDocument GetInvoice(Factura factura, Usuario usuario, Reservacion reservacion, Paquete paquete, string formaPago) {
             //Se crea un nuevo documento de tipo MigraDoc
             var document = new Document();
 
-            BuildDocument(document, idFactura);
+            BuildDocument(document, factura, usuario, reservacion, paquete, formaPago);
 
             //se crea un renderer para el documento de MigraDoc
             var pdfRenderer = new PdfDocumentRenderer
@@ -27,7 +28,7 @@ namespace HotelesBeachSABackend.Services
             return pdfRenderer.PdfDocument;
         }
 
-        private void BuildDocument(Document document, int idFactura)
+        private void BuildDocument(Document document, Factura tempFactura, Usuario tempUsuario, Reservacion tempReservacion, Paquete tempPaquete, string tempFormaPago)
         {
             Section section = document.AddSection();
 
@@ -88,15 +89,15 @@ namespace HotelesBeachSABackend.Services
             userParagraph.AddLineBreak();
 
             // Nombre del usuario
-            userParagraph.AddText($"Nombre: {idFactura}");
+            userParagraph.AddText($"Nombre: {tempUsuario.Nombre_Completo}");
             userParagraph.AddLineBreak();
 
             // Cédula del usuario
-            userParagraph.AddText("Cédula: 123456789");
+            userParagraph.AddText($"Cédula: {tempUsuario.Cedula}");
             userParagraph.AddLineBreak();
 
             // Correo electrónico del usuario
-            userParagraph.AddText("Correo Electrónico: juan.perez@example.com");
+            userParagraph.AddText($"Correo Electrónico: {tempUsuario.Email}");
             userParagraph.AddLineBreak();
 
             // Información de la reservación
@@ -110,14 +111,18 @@ namespace HotelesBeachSABackend.Services
             reservationParagraph.AddLineBreak();
 
             // Fecha de inicio y fin
-            reservationParagraph.AddText("Fecha de Inicio: 1/10/2024");
+            reservationParagraph.AddText($"No Factura: {tempFactura.Id}");
             reservationParagraph.AddLineBreak();
-            reservationParagraph.AddText("Fecha de Finalización: 1/10/2024");
+            reservationParagraph.AddText($"Fecha de Inicio: {tempReservacion.FechaInicio}");
             reservationParagraph.AddLineBreak();
-            reservationParagraph.AddText("Cantidad de Noches: 2");
+            reservationParagraph.AddText($"Fecha de Finalización: {tempReservacion.FechaFin}");
             reservationParagraph.AddLineBreak();
-            reservationParagraph.AddText("Forma de Pago: Efectivo");
+            reservationParagraph.AddText($"Forma de Pago: {tempFormaPago}");
             reservationParagraph.AddLineBreak();
+
+            reservationParagraph.AddText($"Cantidad de Noches: {tempFactura.CantidadNoches}");
+            reservationParagraph.AddLineBreak();
+
 
             // Creacion de Tabla para 
             var table = section.AddTable();
@@ -135,14 +140,14 @@ namespace HotelesBeachSABackend.Services
             row.Cells[0].AddParagraph("Paquete").Format.Font.Bold = true;
             row.Cells[1].AddParagraph("Mensualidades").Format.Font.Bold = true;
             row.Cells[2].AddParagraph("Cantidad de Personas").Format.Font.Bold = true;
-            row.Cells[3].AddParagraph("Costo por Persona").Format.Font.Bold = true;
+            row.Cells[3].AddParagraph("Persona/Noche").Format.Font.Bold = true;
 
             // Valores de la columna
             row = table.AddRow();
-            row.Cells[0].AddParagraph("Todo Incluido");
-            row.Cells[1].AddParagraph("12");
-            row.Cells[2].AddParagraph("5");
-            row.Cells[3].AddParagraph("$25");
+            row.Cells[0].AddParagraph($"{tempPaquete.Nombre}");
+            row.Cells[1].AddParagraph($"{tempPaquete.Mensualidades}");
+            row.Cells[2].AddParagraph($"{tempReservacion.CantidadPersonas}");
+            row.Cells[3].AddParagraph($"${tempPaquete.CostoPersona}");
 
             section.AddParagraph().Format.SpaceAfter = "12pt"; 
 
@@ -161,37 +166,44 @@ namespace HotelesBeachSABackend.Services
             costTable.AddColumn(Unit.FromCentimeter(4)); // Columna 2: Monto
 
             // Valores
+            //row = costTable.AddRow();
+            //row.Cells[0].AddParagraph("Subtotal (Dólares)").Format.Font.Bold = true;
+            //row.Cells[1].AddParagraph($"{tempFactura.TotalDolares}").Format.Font.Bold = true;
+
+            //row = costTable.AddRow();
+            //row.Cells[0].AddParagraph("Total con IVA");
+            //row.Cells[1].AddParagraph("$1130");
+            // Valores
+
+            decimal Subtotal = tempFactura.TotalDolares - (tempFactura.TotalDolares * (tempFactura.ValorDescuento / 100m));
+
             row = costTable.AddRow();
             row.Cells[0].AddParagraph("Subtotal (Dólares)").Format.Font.Bold = true;
-            row.Cells[1].AddParagraph("$1000").Format.Font.Bold = true;
-
-            row = costTable.AddRow();
-            row.Cells[0].AddParagraph("IVA (13%)");
-            row.Cells[1].AddParagraph("$130");
-
-            row = costTable.AddRow();
-            row.Cells[0].AddParagraph("Total con IVA");
-            row.Cells[1].AddParagraph("$1130");
+            row.Cells[1].AddParagraph($"${Subtotal:F2}").Format.Font.Bold = true;
 
             row = costTable.AddRow();
             row.Cells[0].AddParagraph("Descuento");
-            row.Cells[1].AddParagraph("$25");
+            row.Cells[1].AddParagraph($"{tempFactura.ValorDescuento}%"); //listo
 
             row = costTable.AddRow();
             row.Cells[0].AddParagraph("Total (Dólares)");
-            row.Cells[1].AddParagraph("$1105");
+            row.Cells[1].AddParagraph($"${tempFactura.TotalDolares}"); //listo
 
             row = costTable.AddRow();
             row.Cells[0].AddParagraph("Total (Colones)");
-            row.Cells[1].AddParagraph("₡530,400");
+            row.Cells[1].AddParagraph($"₡{tempFactura.TotalColones}");  //listo
+
+            decimal prima = tempFactura.TotalDolares * (tempPaquete.PrimaReserva / 100m);
 
             row = costTable.AddRow();
-            row.Cells[0].AddParagraph("Prima (10%)");
-            row.Cells[1].AddParagraph("$110.50");
+            row.Cells[0].AddParagraph($"Prima ({tempPaquete.PrimaReserva}%)");
+            row.Cells[1].AddParagraph($"${prima:F2}"); //listo
+
+            decimal mensualidad = (tempFactura.TotalDolares - prima) / tempPaquete.Mensualidades;
 
             row = costTable.AddRow();
-            row.Cells[0].AddParagraph("Mensualidad");
-            row.Cells[1].AddParagraph("$82.13");
+            row.Cells[0].AddParagraph("Mensualidad(Dolares)");
+            row.Cells[1].AddParagraph($"${mensualidad:F2}");
 
             // Fin del documento
             paragraph = section.Footers.Primary.AddParagraph();

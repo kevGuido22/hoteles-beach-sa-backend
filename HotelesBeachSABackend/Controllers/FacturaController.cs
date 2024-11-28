@@ -141,6 +141,12 @@ namespace HotelesBeachSABackend.Controllers
                 });
             }
         }
+        [HttpGet("ObtenerFacturaAsync")]
+        public async Task<Factura> ObtenerFacturaAsync(int id)
+        {
+            return await _context.Facturas.FirstOrDefaultAsync(f => f.Id == id);
+        }
+
 
         [HttpPut("Editar")]
         [Authorize]
