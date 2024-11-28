@@ -22,21 +22,22 @@ namespace HotelesBeachSABackend.Controllers
         public async Task<IActionResult> Listado()
         {
             var rolesPermisos = await _context.RolesPermisos
-       .Include(rp => rp.Rol)          // Incluye la información del Rol
-       .Include(rp => rp.Permiso)      // Incluye la información del Permiso
-       .Select(rp => new RolPermisoDTO // Proyecta los datos al DTO
-       {
-           RolId = rp.RolId,
-           RolName = rp.Rol.Name,     // Asumiendo que la propiedad se llama "Nombre"
-           PermisoId = rp.PermisoId,
-           PermisoName = rp.Permiso.Name // Asumiendo que la propiedad se llama "Nombre"
-       })
-       .ToListAsync();
-
-
+            .Include(rp => rp.Rol)          // Incluye la información del Rol
+            .Include(rp => rp.Permiso)      // Incluye la información del Permiso
+            .Select(rp => new RolPermisoDTO // Proyecta los datos al DTO
+            {
+                RolPermisoId = rp.Id,
+                RolId = rp.RolId,
+                RolName = rp.Rol.Name,     // Asumiendo que la propiedad se llama "Nombre"
+                PermisoId = rp.PermisoId,
+                PermisoName = rp.Permiso.Name // Asumiendo que la propiedad se llama "Nombre"
+            })
+            .ToListAsync();
 
             return StatusCode(200, rolesPermisos);
         }
+
+        
 
     }
 }
