@@ -2,7 +2,7 @@
 {
     public class RolPermisoDTO
     {
-        public int RolPermisoID { get; set; }
+        public int RolPermisoId { get; set; }
 
         public int RolId { get; set; }
 

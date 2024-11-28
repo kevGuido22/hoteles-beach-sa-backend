@@ -3,6 +3,7 @@ using HotelesBeachSABackend.Models;
 using HotelesBeachSABackend.Models.Custom;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace HotelesBeachSABackend.Controllers
 {
@@ -22,22 +23,47 @@ namespace HotelesBeachSABackend.Controllers
         public async Task<IActionResult> Listado()
         {
             var rolesPermisos = await _context.RolesPermisos
-            .Include(rp => rp.Rol)          // Incluye la información del Rol
-            .Include(rp => rp.Permiso)      // Incluye la información del Permiso
-            .Select(rp => new RolPermisoDTO // Proyecta los datos al DTO
+            .Include(rp => rp.Rol)          //  JOIN
+            .Include(rp => rp.Permiso)      // JOIN
+            .Select(rp => new RolPermisoDTO // SELECT
             {
                 RolPermisoId = rp.Id,
                 RolId = rp.RolId,
-                RolName = rp.Rol.Name,     // Asumiendo que la propiedad se llama "Nombre"
+                RolName = rp.Rol.Name,
                 PermisoId = rp.PermisoId,
-                PermisoName = rp.Permiso.Name // Asumiendo que la propiedad se llama "Nombre"
+                PermisoName = rp.Permiso.Name
             })
             .ToListAsync();
 
             return StatusCode(200, rolesPermisos);
         }
 
-        
+        [HttpGet("Buscar")]
+        public async Task<IActionResult> Buscar(int rolPermisoId)
+        {
+            var rolPermiso = await _context.RolesPermisos
+                .Include(rp => rp.Rol)          // JOIN
+                .Include(rp => rp.Permiso)      // JOIN
+                .Where(rp => rp.Id == rolPermisoId) // WHERE
+                .Select(rp => new RolPermisoDTO // SELECT
+                {
+                    RolPermisoId = rp.Id,
+                    RolId = rp.RolId,
+                    RolName = rp.Rol.Name,
+                    PermisoId = rp.PermisoId,
+                    PermisoName = rp.Permiso.Name
+                })
+                .FirstOrDefaultAsync(); // Obtén el primer registro 
 
+            if (rolPermiso == null)
+            {
+                return NotFound(new { message = "El RolPermiso no fue encontrado." });
+            }
+
+            return StatusCode(200, rolPermiso);
+
+
+
+        }
     }
 }
