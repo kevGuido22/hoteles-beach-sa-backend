@@ -21,7 +21,7 @@ namespace HotelesBeachSABackend.Controllers
         }
 
         [HttpGet("Listado")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Listado()
         {
             var rolesPermisos = await _context.RolesPermisos
@@ -67,7 +67,7 @@ namespace HotelesBeachSABackend.Controllers
         }
 
         [HttpPost("Crear")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Crear(RolPermisoDTO rolPermisoDTO) 
         {
             Rol rolTemp = await _context.Roles.FirstOrDefaultAsync(x => x.Id == rolPermisoDTO.RolId);
@@ -108,7 +108,7 @@ namespace HotelesBeachSABackend.Controllers
         }
 
         [HttpDelete("Eliminar")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Eliminar(int rolPermisoId) 
         { 
             RolPermiso rolPermiso = await _context.RolesPermisos.FirstOrDefaultAsync(x => x.Id == rolPermisoId);
