@@ -45,11 +45,12 @@ namespace HotelesBeachSABackend.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Error al crear un Rol");
+                return StatusCode(500, $"Error al crear un Rol {ex.InnerException}");
             }
         }
 
         [HttpPut("Editar")]
+        [Authorize]
         public async Task<IActionResult> Editar(Rol rol) 
         {
             if (rol == null)
@@ -76,9 +77,35 @@ namespace HotelesBeachSABackend.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "Error al editar un rol");
+                return StatusCode(500, $"Error al editar un rol: {ex.InnerException}");
             }
 
         }
+
+        [HttpDelete("Eliminar")]
+        [Authorize]
+        public async Task<IActionResult> Eliminar(int id)
+        {
+            Rol rolTemp = await _context.Roles.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (rolTemp == null) 
+            {
+                return StatusCode(400, "No existe un rol con este id");
+            }
+
+            try
+            {
+                _context.Roles.Remove(rolTemp); 
+
+                await _context.SaveChangesAsync();
+
+                return StatusCode(200, "Rol eliminado exitosamente");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Error al eliminar un rol: {ex.InnerException}");
+            }
+        }
+
     }
 }
