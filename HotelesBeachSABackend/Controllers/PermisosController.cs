@@ -109,5 +109,18 @@ namespace HotelesBeachSABackend.Controllers
             }
         }
 
+        [HttpGet("Buscar")]
+        public async Task<IActionResult> Buscar(int id)
+        {
+            Permiso permisoTemp = await _context.Permisos.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (permisoTemp == null)
+            {
+                return StatusCode(400, "No se encontro ningun permiso con este id");
+            }
+
+            return StatusCode(200, permisoTemp);
+        }
+
     }
 }
